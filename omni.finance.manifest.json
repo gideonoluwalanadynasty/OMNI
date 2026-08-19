@@ -1,0 +1,170 @@
+{
+  "$schema": "https://omni.com/schemas/manifest.v1.json",
+  "appId": "finance",
+  "name": "OMNI Finance OS",
+  "slug": "finance",
+  "version": "1.0.0",
+  "author": "OMNI Global Financial Technologies",
+  "description": "Global financial operating system powering sovereign ledger accounts, multi-currency treasury, instant payment rails, smart invoicing, corporate payroll, FX auto-hedging, AI financial intelligence, compliance AML/KYB screening, and white-label fintech infrastructure.",
+  "isNative": true,
+  "category": "finance",
+  "routes": {
+    "primary": "https://finance.omni.com",
+    "path": "/finance",
+    "aliases": [
+      "https://omni.com/finance",
+      "omni://finance"
+    ]
+  },
+  "subdomain": "finance.omni.com",
+  "capabilities": {
+    "finance.wallet": {
+      "enabled": true,
+      "multiCurrency": true,
+      "cryptoVaults": true,
+      "virtualCards": true
+    },
+    "finance.payments": {
+      "enabled": true,
+      "rails": ["ach", "sepa", "swift", "fednow", "pix", "upi", "mpesa", "cards", "crypto_settlement"],
+      "instantPayouts": true
+    },
+    "finance.fx": {
+      "enabled": true,
+      "realTimeRates": true,
+      "autoHedging": true,
+      "multiCorridorLiquidity": true
+    },
+    "finance.accounts": {
+      "enabled": true,
+      "virtualIban": true,
+      "routingNumbers": true,
+      "subLedgers": true
+    },
+    "finance.invoices": {
+      "enabled": true,
+      "multiJurisdictionTax": true,
+      "factoringAndFinancing": true,
+      "automatedDunning": true
+    },
+    "finance.expenses": {
+      "enabled": true,
+      "receiptOcr": true,
+      "spendLimits": true,
+      "realTimeApproval": true
+    },
+    "finance.payroll": {
+      "enabled": true,
+      "globalContractors": true,
+      "taxWithholding": true,
+      "directDeposit": true
+    },
+    "finance.treasury": {
+      "enabled": true,
+      "cashPooling": true,
+      "yieldOptimization": true,
+      "liquidityLadders": true
+    },
+    "finance.compliance": {
+      "enabled": true,
+      "kycKybTiers": true,
+      "amlSanctionsScreening": true,
+      "sarReporting": true,
+      "travelRule": true
+    },
+    "finance.analytics": {
+      "enabled": true,
+      "runwayForecasting": true,
+      "plStatement": true,
+      "cashFlowPredictor": true
+    },
+    "finance.ai": {
+      "enabled": true,
+      "anomalyDetection": true,
+      "copilotAdvisory": true,
+      "autonomousReconciliation": true
+    },
+    "finance.api": {
+      "enabled": true,
+      "rest": true,
+      "graphql": true,
+      "webhooks": true,
+      "sandbox": true
+    },
+    "finance.whiteLabel": {
+      "enabled": true,
+      "customBranding": true,
+      "customBinRanges": true,
+      "revenueShareLedger": true
+    },
+    "finance.marketplace": {
+      "enabled": true,
+      "escrowSettlement": true,
+      "merchantSplitSettlement": true
+    },
+    "finance.capital": {
+      "enabled": true,
+      "syndicatedLending": true,
+      "equityLedgers": true,
+      "revenueBasedFinancing": true
+    }
+  },
+  "requiredScopes": [
+    "finance.wallet.read",
+    "finance.accounts.read",
+    "finance.transactions.read",
+    "finance.payments.create"
+  ],
+  "optionalScopes": [
+    "finance.ledger.manage",
+    "finance.fx.trade",
+    "finance.invoices.manage",
+    "finance.payroll.execute",
+    "finance.treasury.manage",
+    "finance.compliance.audit",
+    "finance.whitelabel.admin",
+    "finance.api.keys.manage",
+    "finance.cards.issue",
+    "finance.lending.apply"
+  ],
+  "supportedLanguages": ["en", "es", "fr", "de", "ja", "zh", "ar", "pt", "hi"],
+  "supportedCountries": ["GLOBAL", "US", "EU", "GB", "CA", "AU", "JP", "SG", "NG", "BR", "IN", "AE", "CH", "MX", "ZA"],
+  "billingModel": "pay_as_you_go",
+  "whiteLabelCapability": true,
+  "resellerCapability": true,
+  "affiliateCapability": true,
+  "aiCapability": true,
+  "mobileCapability": true,
+  "apiInfo": {
+    "version": "v1",
+    "endpoints": [
+      "/api/v1/finance/accounts",
+      "/api/v1/finance/ledger/post",
+      "/api/v1/finance/payments/create",
+      "/api/v1/finance/fx/rates",
+      "/api/v1/finance/invoices",
+      "/api/v1/finance/payroll/run",
+      "/api/v1/finance/compliance/screen",
+      "/api/v1/finance/features"
+    ]
+  },
+  "webhookConfig": {
+    "deliveryUrl": "https://api.omni.com/webhooks/finance",
+    "subscribedEvents": [
+      "finance.payment.completed",
+      "finance.payment.failed",
+      "finance.ledger.posted",
+      "finance.kyc.approved",
+      "finance.fraud.flagged",
+      "finance.fx.order_filled",
+      "finance.payroll.settled"
+    ]
+  },
+  "featureFlags": [
+    "FLAG_FINANCE_INSTANT_PAYMENTS",
+    "FLAG_FINANCE_AI_TREASURY_REBALANCE",
+    "FLAG_FINANCE_AUTO_FX_HEDGING",
+    "FLAG_FINANCE_PQC_LEDGER_MERKLE",
+    "FLAG_FINANCE_WHITE_LABEL_BAAS"
+  ]
+}

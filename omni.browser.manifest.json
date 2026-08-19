@@ -1,0 +1,201 @@
+{
+  "$schema": "https://omni.com/schemas/manifest.v1.json",
+  "appId": "browser",
+  "name": "OMNI Browser",
+  "slug": "browser",
+  "version": "1.0.0",
+  "author": "OMNI Secure Systems & Intelligence",
+  "description": "Intelligent privacy-first gateway into the OMNI ecosystem. Features AI-assisted browsing, multi-tenant digital workspaces, sovereign VPN routing, zero-telemetry tracker shields, sandboxed web execution, and native OMNI ecosystem app launcher.",
+  "isNative": true,
+  "category": "core",
+  "routes": {
+    "primary": "https://browser.omni.com",
+    "path": "/browser",
+    "aliases": [
+      "https://omni.com/browser"
+    ]
+  },
+  "subdomain": "browser.omni.com",
+  "capabilities": {
+    "identity": {
+      "enabled": true,
+      "passportSync": true,
+      "multiProfileSupport": true,
+      "supportedProfiles": [
+        "personal",
+        "professional",
+        "creator",
+        "developer",
+        "seller",
+        "affiliate",
+        "investor"
+      ]
+    },
+    "organizations": {
+      "enabled": true,
+      "multiTenantIsolation": true,
+      "enterprisePolicyEnforcement": true
+    },
+    "permissions": {
+      "enabled": true,
+      "granularEvaluation": true
+    },
+    "ai": {
+      "enabled": true,
+      "sdkBinding": "@omni/ai-sdk",
+      "omniboxIntelligence": true,
+      "pageSummarization": true,
+      "contextualCopilot": true,
+      "factChecking": true,
+      "deepResearchIntegration": true
+    },
+    "security": {
+      "enabled": true,
+      "trackerBlocker": true,
+      "adShield": true,
+      "fingerprintScrambler": true,
+      "cookieContainers": true,
+      "httpsUpgrade": true,
+      "malwareFilter": true,
+      "sslInspection": true
+    },
+    "vpn": {
+      "enabled": true,
+      "multiHopRelays": true,
+      "dnsOverHttps": true,
+      "killSwitch": true,
+      "splitTunneling": true,
+      "torBridgeRouting": true
+    },
+    "workspace": {
+      "enabled": true,
+      "multiWorkspaceTabs": true,
+      "tabGroups": true,
+      "splitView": true,
+      "sessionSnapshots": true,
+      "cloudBackup": true
+    },
+    "cloud": {
+      "enabled": true,
+      "crossDeviceSync": true,
+      "encryptedBookmarkVault": true
+    },
+    "storage": {
+      "enabled": true,
+      "downloadManager": true,
+      "offlineReaderCache": true
+    },
+    "search": {
+      "enabled": true,
+      "groundedWebSearch": true,
+      "multiEngineSupport": true,
+      "privacyPreservingQueries": true
+    },
+    "notifications": {
+      "enabled": true,
+      "downloadAlerts": true,
+      "securityWarnings": true,
+      "aiSummaryReady": true
+    },
+    "analytics": {
+      "enabled": true,
+      "privacyShieldCounters": true,
+      "bandwidthSavingsTelemetry": true
+    },
+    "marketplace": {
+      "enabled": true,
+      "extensionDirectory": true,
+      "verifiedPublisherReview": true,
+      "web3KeyVaults": true
+    },
+    "advertising": {
+      "enabled": true,
+      "adBlockEngine": true,
+      "privacyConsentController": true
+    },
+    "billing": {
+      "enabled": true,
+      "vpnDataUsageBilling": true,
+      "doubleEntryLedgerSync": true
+    },
+    "subscriptions": {
+      "enabled": true,
+      "supportedPlans": [
+        "free",
+        "growth",
+        "enterprise"
+      ]
+    },
+    "affiliate": {
+      "enabled": true,
+      "referralBadge": true
+    },
+    "reseller": {
+      "enabled": true,
+      "tenantDeployment": true
+    },
+    "white_label": {
+      "enabled": true,
+      "customBrandedBrowser": true,
+      "customThemeColors": true,
+      "corporateStartPage": true
+    },
+    "developer": {
+      "enabled": true,
+      "domInspector": true,
+      "networkViewer": true,
+      "nativeBridgeApi": true
+    }
+  },
+  "scopes": {
+    "required": [
+      "browser.profile.read",
+      "browser.sync.manage",
+      "browser.bookmark.manage",
+      "browser.workspace.create",
+      "browser.security.manage",
+      "browser.ai.use"
+    ],
+    "optional": [
+      "browser.extension.install",
+      "browser.vpn.manage",
+      "browser.content.personalize",
+      "browser.enterprise.manage",
+      "browser.downloads.manage",
+      "browser.history.manage",
+      "browser.shield.manage"
+    ]
+  },
+  "domainEvents": {
+    "publishes": [
+      "browser.session.started",
+      "browser.tab.opened",
+      "browser.workspace.switched",
+      "browser.shield.blocked",
+      "browser.vpn.connected",
+      "browser.bookmark.created",
+      "browser.ai.assisted",
+      "browser.extension.activated"
+    ],
+    "subscribes": [
+      "user.created",
+      "organization.created",
+      "subscription.started",
+      "ai.request.completed"
+    ]
+  },
+  "supportedLanguages": [
+    "en",
+    "es",
+    "fr",
+    "de",
+    "ja",
+    "ar"
+  ],
+  "accessibility": {
+    "wcagLevel": "AA",
+    "keyboardNavigable": true,
+    "screenReaderOptimized": true,
+    "highContrastSupport": true
+  }
+}

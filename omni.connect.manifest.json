@@ -1,0 +1,234 @@
+{
+  "$schema": "https://omni.com/schemas/manifest.v1.json",
+  "appId": "connect",
+  "name": "OMNI Connect",
+  "slug": "connect",
+  "version": "1.0.0",
+  "author": "OMNI Sovereign Communications & Social Technologies",
+  "description": "AI-Powered Social, Communication, Community, Commerce & Business Super-App uniting personal social feeds, real-time messaging, community hubs, omni-channel CRM, live commerce, creator monetization, HD meetings, and AI-powered collaboration.",
+  "isNative": true,
+  "category": "social_communication",
+  "routes": {
+    "primary": "https://connect.omni.com",
+    "path": "/connect",
+    "aliases": [
+      "https://omni.com/connect",
+      "omni://connect"
+    ]
+  },
+  "subdomain": "connect.omni.com",
+  "capabilities": {
+    "connect.identity": {
+      "enabled": true,
+      "omniPassportIntegration": true,
+      "multiProfileSwitching": true,
+      "verifiedBadges": true
+    },
+    "connect.social": {
+      "enabled": true,
+      "chronologicalFeed": true,
+      "algorithmicFeed": true,
+      "stories": true,
+      "richReactions": true,
+      "threadedComments": true
+    },
+    "connect.messaging": {
+      "enabled": true,
+      "directMessages": true,
+      "groupChats": true,
+      "voiceNotes": true,
+      "endToEndEncryption": true,
+      "typingIndicators": true,
+      "presenceStatus": true
+    },
+    "connect.communities": {
+      "enabled": true,
+      "publicCommunities": true,
+      "privateMembersOnly": true,
+      "hierarchicalRoles": true,
+      "communityRules": true
+    },
+    "connect.groups": {
+      "enabled": true,
+      "familyGroups": true,
+      "teamWorkspaces": true,
+      "studyCircles": true,
+      "projectSquads": true
+    },
+    "connect.channels": {
+      "enabled": true,
+      "announcementBroadcasts": true,
+      "topicDiscussions": true,
+      "voiceRooms": true,
+      "readOnlyModeration": true
+    },
+    "connect.content": {
+      "enabled": true,
+      "richTextPublishing": true,
+      "articleBlogs": true,
+      "pollsAndSurveys": true,
+      "scheduledPosts": true
+    },
+    "connect.media": {
+      "enabled": true,
+      "photoGalleries": true,
+      "shortFormReels": true,
+      "longFormVideo": true,
+      "audioPodcasts": true,
+      "documentSharing": true
+    },
+    "connect.business": {
+      "enabled": true,
+      "verifiedBusinessPages": true,
+      "workingHours": true,
+      "automatedAwayMessages": true,
+      "staffMemberRoles": true
+    },
+    "connect.crm": {
+      "enabled": true,
+      "contactDirectory": true,
+      "leadPipelineStages": true,
+      "conversationTags": true,
+      "supportTicketing": true,
+      "activityTimeline": true
+    },
+    "connect.commerce": {
+      "enabled": true,
+      "socialStorefronts": true,
+      "inFeedProductCards": true,
+      "oneClickOmniPayCheckout": true,
+      "escrowProtection": true,
+      "orderTracking": true
+    },
+    "connect.creator": {
+      "enabled": true,
+      "creatorStudioAnalytics": true,
+      "subscriberTiers": true,
+      "directTipsJar": true,
+      "paywalledPosts": true,
+      "brandSponsorshipDeals": true
+    },
+    "connect.events": {
+      "enabled": true,
+      "virtualEvents": true,
+      "inPersonGatherings": true,
+      "ticketingAndRsvp": true,
+      "calendarSync": true,
+      "geoMapping": true
+    },
+    "connect.meetings": {
+      "enabled": true,
+      "hdVideoConferencing": true,
+      "screenSharing": true,
+      "aiLiveTranscription": true,
+      "breakoutRooms": true,
+      "meetingRecordings": true
+    },
+    "connect.ai": {
+      "enabled": true,
+      "aiChatAssistant": true,
+      "smartReplySuggestions": true,
+      "realTimeTranslation": true,
+      "automatedModeration": true,
+      "contentEnhancer": true
+    },
+    "connect.ads": {
+      "enabled": true,
+      "nativeFeedSponsorships": true,
+      "promotedChannels": true,
+      "targetedCampaigns": true,
+      "privacyPreservingAttribution": true
+    },
+    "connect.analytics": {
+      "enabled": true,
+      "engagementMetrics": true,
+      "audienceDemographics": true,
+      "reachTrends": true,
+      "conversionFunnels": true
+    },
+    "connect.api": {
+      "enabled": true,
+      "rest": true,
+      "webSockets": true,
+      "webhooks": true,
+      "sdks": true,
+      "botApi": true
+    },
+    "connect.whitelabel": {
+      "enabled": true,
+      "customBrandingAndColors": true,
+      "customDomains": true,
+      "isolatedTenancy": true,
+      "resellerEconomics": true
+    }
+  },
+  "requiredScopes": [
+    "passport.identity.read",
+    "connect.profile.read",
+    "connect.feed.read",
+    "connect.messaging.read",
+    "connect.messaging.send"
+  ],
+  "optionalScopes": [
+    "connect.social.post",
+    "connect.communities.manage",
+    "connect.business.manage",
+    "connect.crm.read_write",
+    "connect.commerce.transact",
+    "connect.creator.monetize",
+    "connect.events.create",
+    "connect.meetings.host",
+    "connect.ai.copilot",
+    "connect.ads.manage",
+    "connect.whitelabel.admin"
+  ],
+  "supportedLanguages": ["en", "es", "fr", "de", "ja", "zh", "ar", "pt", "hi", "sw", "yo", "ha"],
+  "supportedCountries": ["GLOBAL", "US", "EU", "GB", "CA", "AU", "JP", "SG", "NG", "BR", "IN", "AE", "ZA", "KE", "GH"],
+  "billingModel": "freemium_and_pay_as_you_go",
+  "whiteLabelCapability": true,
+  "resellerCapability": true,
+  "affiliateCapability": true,
+  "aiCapability": true,
+  "mobileCapability": true,
+  "apiInfo": {
+    "version": "v1",
+    "endpoints": [
+      "/api/v1/connect/profiles",
+      "/api/v1/connect/feed",
+      "/api/v1/connect/messages",
+      "/api/v1/connect/conversations",
+      "/api/v1/connect/communities",
+      "/api/v1/connect/channels",
+      "/api/v1/connect/events",
+      "/api/v1/connect/crm/contacts",
+      "/api/v1/connect/crm/deals",
+      "/api/v1/connect/commerce/products",
+      "/api/v1/connect/creator/analytics",
+      "/api/v1/connect/ai/assistant"
+    ]
+  },
+  "webhookConfig": {
+    "deliveryUrl": "https://api.omni.com/webhooks/connect",
+    "subscribedEvents": [
+      "connect.message.sent",
+      "connect.post.published",
+      "connect.reaction.added",
+      "connect.community.member_joined",
+      "connect.crm.lead_created",
+      "connect.commerce.order_placed",
+      "connect.creator.subscriber_added",
+      "connect.event.rsvp_confirmed",
+      "connect.moderation.content_flagged"
+    ]
+  },
+  "featureFlags": [
+    "FLAG_CONNECT_REALTIME_MESSAGING",
+    "FLAG_CONNECT_COMMUNITIES_ENGINE",
+    "FLAG_CONNECT_COMMERCE_STOREFRONTS",
+    "FLAG_CONNECT_CREATOR_STUDIO",
+    "FLAG_CONNECT_OMNI_CRM",
+    "FLAG_CONNECT_AI_ASSISTANT",
+    "FLAG_CONNECT_HD_MEETINGS",
+    "FLAG_CONNECT_WHITE_LABEL"
+  ]
+}

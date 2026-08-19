@@ -1,0 +1,185 @@
+{
+  "$schema": "https://omni.com/schemas/manifest.v1.json",
+  "appId": "ai",
+  "name": "OMNI AI",
+  "slug": "ai",
+  "version": "1.0.0",
+  "author": "OMNI Intelligence Labs",
+  "description": "Unified sovereign AI operating system & consumer intelligence product. Multimodal chat, deep research, grounded web search, autonomous agent orchestration, RAG knowledge vaults, sandboxed code execution, and creative generative studio.",
+  "isNative": true,
+  "category": "productivity",
+  "routes": {
+    "primary": "https://ai.omni.com",
+    "path": "/ai",
+    "aliases": [
+      "https://omni.com/ai"
+    ]
+  },
+  "subdomain": "ai.omni.com",
+  "capabilities": {
+    "passport": {
+      "enabled": true,
+      "sso": true,
+      "profileDisambiguation": true,
+      "supportedProfiles": ["personal", "professional", "creator", "developer", "seller", "affiliate", "investor"]
+    },
+    "organizations": {
+      "enabled": true,
+      "multiTenantIsolation": true,
+      "roleBasedAccessControl": true
+    },
+    "permissions": {
+      "enabled": true,
+      "granularEvaluation": true
+    },
+    "billing": {
+      "enabled": true,
+      "billingModel": "pay_as_you_go",
+      "meteredCompute": true,
+      "budgetThresholdAlerts": true
+    },
+    "wallet": {
+      "enabled": true,
+      "doubleEntryIntegration": true,
+      "allowCreditDebitLegs": true
+    },
+    "subscriptions": {
+      "enabled": true,
+      "supportedPlans": ["free", "growth", "enterprise"]
+    },
+    "affiliate": {
+      "enabled": true,
+      "attributionTracking": true,
+      "commissionSharing": true
+    },
+    "reseller": {
+      "enabled": true,
+      "marginCustomization": true,
+      "customModelGateways": true
+    },
+    "white_label": {
+      "enabled": true,
+      "customDomainBinding": true,
+      "customBrandingCSS": true
+    },
+    "ai": {
+      "enabled": true,
+      "multiModelRouting": true,
+      "agentOrchestration": true,
+      "autonomyLevels": [0, 1, 2, 3, 4, 5],
+      "ragKnowledgeVaults": true,
+      "codeSandbox": true,
+      "creativeStudio": true
+    },
+    "notifications": {
+      "enabled": true,
+      "quotaAlerts": true,
+      "approvalAlerts": true,
+      "artifactReadiness": true
+    },
+    "analytics": {
+      "enabled": true,
+      "tokenTelemetry": true,
+      "latencyTracking": true,
+      "costBreakdowns": true
+    },
+    "trust": {
+      "enabled": true,
+      "kycKybGating": true,
+      "sentryAntiFraud": true,
+      "policyDecisionLogs": true
+    },
+    "storage": {
+      "enabled": true,
+      "knowledgeEmbeddings": true,
+      "documentVaults": true,
+      "artifactStorage": true
+    },
+    "api": {
+      "enabled": true,
+      "restGateway": true,
+      "webSocketStreaming": true,
+      "multiLanguageSdks": true
+    },
+    "webhooks": {
+      "enabled": true,
+      "hmacSigned": true,
+      "antiReplayGuarantees": true
+    },
+    "search": {
+      "enabled": true,
+      "groundedWebSearch": true,
+      "enterpriseVectorSearch": true,
+      "factualityVerification": true
+    },
+    "marketplace": {
+      "enabled": true,
+      "agentPublishing": true,
+      "promptPacks": true,
+      "toolConnectors": true,
+      "developerRevenueShare": true
+    }
+  },
+  "scopes": {
+    "required": [
+      "ai.chat.use",
+      "ai.search.use",
+      "ai.models.select",
+      "ai.billing.view"
+    ],
+    "optional": [
+      "ai.research.run",
+      "ai.knowledge.read",
+      "ai.knowledge.write",
+      "ai.files.upload",
+      "ai.documents.create",
+      "ai.slides.create",
+      "ai.sheets.create",
+      "ai.media.generate",
+      "ai.agents.create",
+      "ai.agents.run",
+      "ai.tools.invoke",
+      "ai.code.use",
+      "ai.team.manage",
+      "ai.provider.manage",
+      "ai.admin.manage"
+    ]
+  },
+  "domainEvents": {
+    "publishes": [
+      "ai.request.started",
+      "ai.request.completed",
+      "ai.request.failed",
+      "ai.usage.recorded",
+      "ai.agent.created",
+      "ai.agent.run.started",
+      "ai.agent.action.requested",
+      "ai.agent.action.approved",
+      "ai.agent.action.executed",
+      "ai.knowledge.indexed",
+      "ai.artifact.created",
+      "ai.marketplace.item.published"
+    ],
+    "subscribes": [
+      "user.created",
+      "organization.created",
+      "subscription.started",
+      "payment.completed",
+      "wallet.transaction.completed"
+    ]
+  },
+  "supportedLanguages": [
+    "en",
+    "es",
+    "fr",
+    "de",
+    "ja",
+    "ar"
+  ],
+  "accessibility": {
+    "wcagLevel": "AA",
+    "keyboardNavigable": true,
+    "screenReaderOptimized": true,
+    "rtlSupported": true
+  }
+}
