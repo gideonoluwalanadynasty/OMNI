@@ -1,685 +1,737 @@
 import {
-  WhiteLabelInstitutionTenant,
-  WhiteLabelTenantUser,
-  WhiteLabelConnectedProvider,
-  WhiteLabelAffiliateCampaign
-} from '../types/finance_os';
+  WhiteLabelTenant,
+  EnterpriseMember,
+  EnterpriseAnnouncement,
+  EnterpriseKnowledgeDoc,
+  EnterprisePartnerNetwork,
+  TenantAuditLog,
+  WhiteLabelTestSuiteResult,
+} from '../types/omni_white_label';
 
-export const SEED_WHITE_LABEL_INSTITUTIONS: WhiteLabelInstitutionTenant[] = [
+export const SEED_WHITE_LABEL_TENANTS: WhiteLabelTenant[] = [
   {
-    id: 'wli_novapay',
-    name: 'NovaPay Global Bank',
-    slug: 'novapay',
-    category: 'digital_bank',
-    status: 'active',
-    country: 'United Kingdom',
-    jurisdiction: 'FCA (UK) / EEA Passported',
+    id: 'tenant-aegis-corp',
+    slug: 'aegis-technologies',
+    customerType: 'company',
+    ecosystemMode: 'isolated_private',
     branding: {
-      brandName: 'NovaPay Bank',
-      tagline: 'The Intelligent NeoBanking Operating System',
-      companyLegalName: 'NovaPay Financial Technologies Ltd',
-      supportEmail: 'concierge@novapay.global',
-      supportPhone: '+44 20 7946 0912',
-      copyrightText: '© 2026 NovaPay Global Ltd. Authorized FaaS Tenant under OMNI Sovereign Charter.',
-      logoUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=60',
-      faviconUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=32&auto=format&fit=crop&q=60',
-      mobileConfig: {
-        appTitle: 'NovaPay Mobile',
-        splashColor: '#0f172a',
-        appIconShape: 'squircle',
-        appStoreId: 'id1594829104',
-        playStoreId: 'com.novapay.banking'
-      },
-      emailConfig: {
-        headerLogoUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150',
-        footerSignature: 'NovaPay Client Experience Team • 100 Bishopsgate, London EC2N 4AG',
-        senderName: 'NovaPay Notifications',
-        senderEmail: 'no-reply@service.novapay.global',
-        accentColor: '#6366f1'
-      },
-      notificationConfig: {
-        pushTitlePrefix: '[NovaPay Alert]',
-        smsSenderId: 'NOVAPAY',
-        enablePush: true,
-        enableSms: true
-      },
-      cardConfig: {
-        cardArtStyle: 'minimal_dark',
-        customBinPrefix: '418294',
-        cardProgramName: 'NovaPay Infinite Metal Card',
-        embossedNameDefault: 'VALUED NOVAPAY MEMBER'
-      }
-    },
-    theme: {
-      primaryColor: '#4f46e5',
-      secondaryColor: '#06b6d4',
-      accentColor: '#10b981',
+      brandName: 'Aegis Quantum Dynamics',
+      tagline: 'Sovereign Enterprise Defense & Autonomous Systems',
+      logoUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80',
+      faviconUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=64&auto=format&fit=crop&q=80',
+      primaryColor: '#0ea5e9',
+      secondaryColor: '#0369a1',
+      accentColor: '#38bdf8',
       surfaceColor: '#0f172a',
-      textColor: '#f8fafc',
-      fontFamily: 'Plus Jakarta Sans',
-      borderRadius: 'rounded-xl',
-      colorMode: 'dark'
+      borderRadius: 'lg',
+      fontFamily: 'Space Grotesk',
+      mobileAppIconUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=128&auto=format&fit=crop&q=80',
     },
-    products: {
-      wallet: true,
-      payments: true,
-      fx: true,
-      cards: true,
-      invoices: true,
-      payroll: true,
-      businessFinance: true,
-      treasury: true,
-      aiFinance: true,
-      marketplacePayments: false,
-      developerApis: true
-    },
-    financialRules: {
-      transactionFeePercent: 0.15,
-      fixedFeePerTxUsd: 0.20,
-      interchangeMarkupBps: 35,
-      fxSpreadMarkupBps: 25,
-      singleTxLimitUsd: 150000,
-      dailyVelocityLimitUsd: 500000,
-      monthlyThroughputLimitUsd: 25000000,
-      supportedCurrencies: ['USD', 'EUR', 'GBP', 'CHF', 'JPY', 'SGD', 'USDC'],
-      operatingCountries: ['GB', 'US', 'DE', 'FR', 'CH', 'SG'],
-      approvalRules: [
-        { minAmountUsd: 25000, requiredSigners: 2, roleRequired: 'treasury_officer' },
-        { minAmountUsd: 100000, requiredSigners: 3, roleRequired: 'executive_board' }
-      ],
-      complianceTierRequired: 'tier_3_enhanced_due_diligence',
-      transactionPolicies: {
-        allowInternationalWires: true,
-        allowCryptoRail: true,
-        instantSettlementEnabled: true,
-        weekendProcessing: true
-      }
-    },
-    domain: {
-      subdomain: 'novapay',
-      customDomain: 'banking.novapay.global',
-      sslStatus: 'provisioned',
-      dnsRecords: [
-        { type: 'CNAME', host: 'banking.novapay.global', value: 'cname.finance.omni.com', status: 'verified' },
-        { type: 'TXT', host: '_omni-challenge.novapay.global', value: 'omni-tenant-verify=90182409182', status: 'verified' },
-        { type: 'A', host: 'novapay.global', value: '76.76.21.21', status: 'verified' }
-      ]
-    },
-    reseller: {
-      resellerId: 'res_omni_global_direct',
-      parentPartnerName: 'OMNI Financial Core',
-      tier: 'direct_institution',
-      revenueSharePercent: 75,
-      subscriptionTier: 'enterprise_scale',
-      monthlyPlatformFeeUsd: 4999,
-      usageBillingRates: {
-        perActiveWalletUsd: 0.12,
-        perCardIssuedUsd: 1.25,
-        perApiCallUsd: 0.002,
-        bpsOnGmv: 4.5
-      },
-      monthlyThroughputUsd: 14850000,
-      accruedPartnerRevenueUsd: 48920,
-      accruedOmniPlatformShareUsd: 16306
-    },
-    affiliateCampaigns: [
+    domains: [
       {
-        id: 'aff_nova_01',
-        name: 'Tech Founders Q3 Referral Sprint',
-        referralCode: 'NOVA-FOUNDER-2026',
-        commissionType: 'bps_on_volume',
-        commissionValue: 10,
-        totalReferrals: 142,
-        totalAcquisitionGmvUsd: 3200000,
-        totalPayoutUsd: 3200,
-        status: 'active'
+        domain: 'connect.aegisquantum.io',
+        status: 'verified',
+        cnameRecord: 'cname.omni.network',
+        txtVerificationToken: 'omni-verify=aegis-9941a80',
+        sslIssued: true,
+        sslExpiresAt: '2027-08-15',
+        primaryRedirect: true,
       },
       {
-        id: 'aff_nova_02',
-        name: 'Fintech Influencer Ambassador',
-        referralCode: 'NOVA-VIP-ELITE',
-        commissionType: 'fixed_per_customer',
-        commissionValue: 50,
-        totalReferrals: 89,
-        totalAcquisitionGmvUsd: 1100000,
-        totalPayoutUsd: 4450,
-        status: 'active'
-      }
+        domain: 'workplace.aegis.corp',
+        status: 'verified',
+        cnameRecord: 'cname.omni.network',
+        txtVerificationToken: 'omni-verify=aegis-corp-internal',
+        sslIssued: true,
+        sslExpiresAt: '2027-04-10',
+        primaryRedirect: false,
+      },
     ],
+    features: {
+      socialFeed: true,
+      messagingDirect: true,
+      spacesCommunities: true,
+      commerceMarketplace: false,
+      crmDirectory: true,
+      creatorMonetization: false,
+      aiAssistant: true,
+      adsCampaigns: false,
+      eventsWebinars: true,
+      learningLms: true,
+      voiceVideoMeetings: true,
+      knowledgeWiki: true,
+    },
     aiConfig: {
-      assistantName: 'Nova Intelligence Copilot',
-      assistantAvatarUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=80',
-      welcomePrompt: 'Welcome to NovaPay. How can I assist with your corporate cash management or treasury today?',
-      enabledForRetail: true,
-      enabledForBusiness: true,
-      maxAutonomousRecommendationLimitUsd: 50000,
-      disclaimerText: 'Nova Intelligence provides algorithmic treasury analytics and does not constitute statutory tax advice.',
-      customKnowledgeDocs: [
-        { id: 'k_01', title: 'NovaPay Institutional Fee Schedule & Tiering', category: 'Pricing', wordCount: 1420, status: 'indexed' },
-        { id: 'k_02', title: 'Corporate Multi-Signatory Treasury Guidelines', category: 'Compliance', wordCount: 3100, status: 'indexed' }
+      assistantName: 'Aegis Intelligence Sentinel',
+      assistantAvatar: 'https://images.unsplash.com/photo-1534972195531-a756b1126f24?w=120&auto=format&fit=crop&q=80',
+      personaTone: 'executive',
+      knowledgeSources: [
+        { id: 'ks-1', name: 'Quantum Core Security Specs v4.2', type: 'internal_docs', itemCount: 142, lastSynced: '10 mins ago', status: 'indexed' },
+        { id: 'ks-2', name: 'Global Compliance & ITAR Whitepaper', type: 'policy_pdf', itemCount: 38, lastSynced: '1 hour ago', status: 'indexed' },
+        { id: 'ks-3', name: 'Engineering Runbooks & Architecture', type: 'wiki_articles', itemCount: 512, lastSynced: '3 hours ago', status: 'indexed' },
       ],
-      financialEducationModules: [
-        { id: 'edu_01', title: 'Hedging FX Volatility for Global Tech SaaS', topic: 'Currency Risk', durationMin: 12, targetAudience: 'CFOs & Treasurers' },
-        { id: 'edu_02', title: 'Optimizing Working Capital with Dynamic Factoring', topic: 'Liquidity', durationMin: 15, targetAudience: 'Finance Directors' }
-      ]
+      customInstructions: 'You are the sovereign enterprise AI assistant for Aegis Quantum Dynamics. Adhere strictly to ITAR confidentiality guidelines. Never disclose internal quantum encryption keys.',
+      allowedRoles: ['super_admin', 'dept_admin', 'employee'],
+      publicCustomerFacing: false,
+      tokenMonthlyQuota: 50000000,
+      tokensConsumedThisMonth: 14820000,
     },
-    providers: [
-      { id: 'prov_01', category: 'payment_gateway', providerName: 'Stripe Direct', adapterType: 'REST_V2', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 8200000 },
-      { id: 'prov_02', category: 'banking_rail', providerName: 'SEPA Instant Clearing', adapterType: 'ISO_20022', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 5100000 },
-      { id: 'prov_03', category: 'kyc_screening', providerName: 'Persona 3D Biometrics', adapterType: 'OAUTH_SDK', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 0 },
-      { id: 'prov_04', category: 'fx_liquidity', providerName: 'Wise Institutional FX', adapterType: 'FIX_PROTOCOL', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 1550000 }
+    departments: [
+      { id: 'dept-eng', name: 'Quantum Hardware & Architecture', leadName: 'Dr. Elena Rostova', leadAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80', memberCount: 142, privateSpaceId: 'space-eng-core', unreadCount: 5 },
+      { id: 'dept-sec', name: 'Cyber Defense & Red Team', leadName: 'Marcus Thorne', leadAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80', memberCount: 68, privateSpaceId: 'space-sec-ops', unreadCount: 12 },
+      { id: 'dept-prod', name: 'Commercial Solutions & Avionics', leadName: 'Kavita Singh', leadAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80', memberCount: 95, privateSpaceId: 'space-prod-mgmt', unreadCount: 2 },
+      { id: 'dept-exec', name: 'Executive Operations & Governance', leadName: 'Arthur Sterling', leadAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80', memberCount: 18, privateSpaceId: 'space-exec-chamber', unreadCount: 0 },
     ],
-    usersCount: {
-      customers: 12840,
-      businesses: 1420,
-      employees: 640,
-      agents: 48
+    billing: {
+      planId: 'enterprise_sovereign',
+      planName: 'Enterprise Sovereign Shield',
+      monthlyBaseFee: 4950,
+      billingCycle: 'annual',
+      revenueSharePercentToOMNI: 0,
+      usageMeters: {
+        activeUsersCount: 323,
+        userLimit: 1000,
+        storageUsedGb: 840,
+        storageLimitGb: 5000,
+        aiTokensUsed: 14820000,
+        aiTokenLimit: 50000000,
+        bandwidthGb: 3200,
+      },
+      invoices: [
+        { id: 'inv-aegis-0826', period: 'August 2026', amountDue: 4950, status: 'paid', pdfUrl: '#' },
+        { id: 'inv-aegis-0726', period: 'July 2026', amountDue: 4950, status: 'paid', pdfUrl: '#' },
+      ],
     },
-    totalAssetsUnderManagementUsd: 84500000,
-    monthlyThroughputUsd: 14850000,
-    auditLogsCount: 4120,
-    createdAt: '2025-11-10T10:00:00Z',
-    updatedAt: '2026-08-18T08:30:00Z'
+    status: 'active',
+    createdAt: '2026-01-15',
+    ownerEmail: 'ciso@aegisquantum.io',
+    memberCount: 323,
+    activeCommunitiesCount: 28,
+    securityCompliance: {
+      soc2Compliant: true,
+      hipaaCompliant: true,
+      gdprCompliant: true,
+      dataResidencyRegion: 'US-East',
+      dataRetentionDays: 365,
+    },
   },
   {
-    id: 'wli_apex_agri',
-    name: 'Apex Agri-Cooperative Finance',
-    slug: 'apex-agri',
-    category: 'cooperative',
-    status: 'active',
-    country: 'Kenya / East Africa',
-    jurisdiction: 'SASRA / Central Bank of Kenya Regulated',
+    id: 'tenant-oxford-uni',
+    slug: 'oxford-global-academy',
+    customerType: 'university',
+    ecosystemMode: 'omni_ecosystem_federated',
     branding: {
-      brandName: 'Apex Harvest Pay',
-      tagline: 'Farmer-Owned Financial Cooperative & Crop Settlement',
-      companyLegalName: 'Apex Agricultural Financial Services Society Ltd',
-      supportEmail: 'support@apexagri.coop',
-      supportPhone: '+254 20 491 8200',
-      copyrightText: '© 2026 Apex Harvest Cooperative. Powered by OMNI Finance OS.',
-      logoUrl: 'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?w=120&auto=format&fit=crop&q=60',
-      faviconUrl: 'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?w=32&auto=format&fit=crop&q=60',
-      mobileConfig: {
-        appTitle: 'Apex Harvest Wallet',
-        splashColor: '#064e3b',
-        appIconShape: 'rounded_square',
-        appStoreId: 'id160492810',
-        playStoreId: 'coop.apexagri.wallet'
-      },
-      emailConfig: {
-        headerLogoUrl: 'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?w=150',
-        footerSignature: 'Apex Agricultural Member Desk • Cooperative House, Nairobi',
-        senderName: 'Apex Cooperative Dispatch',
-        senderEmail: 'alerts@apexagri.coop',
-        accentColor: '#10b981'
-      },
-      notificationConfig: {
-        pushTitlePrefix: '[Apex Coop]',
-        smsSenderId: 'APEXAGRI',
-        enablePush: true,
-        enableSms: true
-      },
-      cardConfig: {
-        cardArtStyle: 'emerald_sovereign',
-        customBinPrefix: '528194',
-        cardProgramName: 'Apex Member Agri-Card',
-        embossedNameDefault: 'COOPERATIVE MEMBER'
-      }
+      brandName: 'Oxford Polymathic Institute',
+      tagline: 'Interdisciplinary Research, Higher Learning & Student Guilds',
+      logoUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=150&auto=format&fit=crop&q=80',
+      faviconUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=64&auto=format&fit=crop&q=80',
+      primaryColor: '#6366f1',
+      secondaryColor: '#4338ca',
+      accentColor: '#a5b4fc',
+      surfaceColor: '#0f172a',
+      borderRadius: 'md',
+      fontFamily: 'Cinzel',
+      mobileAppIconUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=128&auto=format&fit=crop&q=80',
     },
-    theme: {
-      primaryColor: '#059669',
+    domains: [
+      {
+        domain: 'campus.oxford-polymathic.edu',
+        status: 'verified',
+        cnameRecord: 'cname.omni.network',
+        txtVerificationToken: 'omni-verify=oxford-edu-token',
+        sslIssued: true,
+        sslExpiresAt: '2027-11-20',
+        primaryRedirect: true,
+      },
+    ],
+    features: {
+      socialFeed: true,
+      messagingDirect: true,
+      spacesCommunities: true,
+      commerceMarketplace: true,
+      crmDirectory: true,
+      creatorMonetization: true,
+      aiAssistant: true,
+      adsCampaigns: false,
+      eventsWebinars: true,
+      learningLms: true,
+      voiceVideoMeetings: true,
+      knowledgeWiki: true,
+    },
+    aiConfig: {
+      assistantName: 'Polymath Faculty AI',
+      assistantAvatar: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=120&auto=format&fit=crop&q=80',
+      personaTone: 'academic',
+      knowledgeSources: [
+        { id: 'ks-ox-1', name: 'Open Access Research Repository (JSTOR & arXiv)', type: 'external_url', itemCount: 12400, lastSynced: '4 hours ago', status: 'indexed' },
+        { id: 'ks-ox-2', name: 'Undergraduate Course Catalog & Syllabus Database', type: 'internal_docs', itemCount: 820, lastSynced: 'Yesterday', status: 'indexed' },
+      ],
+      customInstructions: 'Provide rigorous academic guidance, cite peer-reviewed publications, and assist faculty in grading rubric calibrations and research synthesis.',
+      allowedRoles: ['super_admin', 'dept_admin', 'employee', 'member', 'guest'],
+      publicCustomerFacing: true,
+      tokenMonthlyQuota: 100000000,
+      tokensConsumedThisMonth: 64200000,
+    },
+    departments: [
+      { id: 'dept-ox-sci', name: 'Faculty of Natural & Computational Sciences', leadName: 'Prof. Alistair Vance', leadAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80', memberCount: 1420, privateSpaceId: 'space-ox-sci', unreadCount: 14 },
+      { id: 'dept-ox-hum', name: 'Faculty of Humanities, Philosophy & Ethics', leadName: 'Prof. Beatrice Dupont', leadAvatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80', memberCount: 980, privateSpaceId: 'space-ox-hum', unreadCount: 3 },
+      { id: 'dept-ox-med', name: 'School of Clinical Medicine & Genomics', leadName: 'Dr. Tariq Al-Mansoor', leadAvatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=100&auto=format&fit=crop&q=80', memberCount: 650, privateSpaceId: 'space-ox-med', unreadCount: 8 },
+    ],
+    billing: {
+      planId: 'growth_organization',
+      planName: 'Academic Growth Network',
+      monthlyBaseFee: 1850,
+      billingCycle: 'annual',
+      revenueSharePercentToOMNI: 5,
+      usageMeters: {
+        activeUsersCount: 3050,
+        userLimit: 5000,
+        storageUsedGb: 1950,
+        storageLimitGb: 10000,
+        aiTokensUsed: 64200000,
+        aiTokenLimit: 100000000,
+        bandwidthGb: 8900,
+      },
+      invoices: [
+        { id: 'inv-ox-0826', period: 'August 2026', amountDue: 1850, status: 'paid', pdfUrl: '#' },
+      ],
+    },
+    status: 'active',
+    createdAt: '2026-02-01',
+    ownerEmail: 'provost@oxford-polymathic.edu',
+    memberCount: 3050,
+    activeCommunitiesCount: 142,
+    securityCompliance: {
+      soc2Compliant: true,
+      hipaaCompliant: false,
+      gdprCompliant: true,
+      dataResidencyRegion: 'EU-Central',
+      dataRetentionDays: 730,
+    },
+  },
+  {
+    id: 'tenant-grace-church',
+    slug: 'grace-cathedral-global',
+    customerType: 'church',
+    ecosystemMode: 'omni_ecosystem_federated',
+    branding: {
+      brandName: 'Grace Cathedral Fellowship',
+      tagline: 'Faith, Global Ministry, Community Care & Livestream Fellowship',
+      logoUrl: 'https://images.unsplash.com/photo-1548625361-195fe578cb27?w=150&auto=format&fit=crop&q=80',
+      faviconUrl: 'https://images.unsplash.com/photo-1548625361-195fe578cb27?w=64&auto=format&fit=crop&q=80',
+      primaryColor: '#f59e0b',
       secondaryColor: '#d97706',
-      accentColor: '#10b981',
-      surfaceColor: '#064e3b',
-      textColor: '#ecfdf5',
-      fontFamily: 'Inter',
-      borderRadius: 'rounded-xl',
-      colorMode: 'dark'
+      accentColor: '#fde68a',
+      surfaceColor: '#0f172a',
+      borderRadius: 'xl',
+      fontFamily: 'Outfit',
+      mobileAppIconUrl: 'https://images.unsplash.com/photo-1548625361-195fe578cb27?w=128&auto=format&fit=crop&q=80',
     },
-    products: {
-      wallet: true,
-      payments: true,
-      fx: true,
-      cards: true,
-      invoices: true,
-      payroll: true,
-      businessFinance: true,
-      treasury: false,
-      aiFinance: true,
-      marketplacePayments: true,
-      developerApis: false
-    },
-    financialRules: {
-      transactionFeePercent: 0.10,
-      fixedFeePerTxUsd: 0.05,
-      interchangeMarkupBps: 20,
-      fxSpreadMarkupBps: 30,
-      singleTxLimitUsd: 20000,
-      dailyVelocityLimitUsd: 50000,
-      monthlyThroughputLimitUsd: 5000000,
-      supportedCurrencies: ['KES', 'USD', 'EUR', 'GBP', 'TZS', 'UGX'],
-      operatingCountries: ['KE', 'TZ', 'UG', 'RW'],
-      approvalRules: [
-        { minAmountUsd: 5000, requiredSigners: 2, roleRequired: 'coop_branch_manager' }
-      ],
-      complianceTierRequired: 'tier_2_verified_individual',
-      transactionPolicies: {
-        allowInternationalWires: false,
-        allowCryptoRail: false,
-        instantSettlementEnabled: true,
-        weekendProcessing: true
-      }
-    },
-    domain: {
-      subdomain: 'apexagri',
-      customDomain: 'portal.apexagri.coop',
-      sslStatus: 'provisioned',
-      dnsRecords: [
-        { type: 'CNAME', host: 'portal.apexagri.coop', value: 'cname.finance.omni.com', status: 'verified' }
-      ]
-    },
-    reseller: {
-      resellerId: 'res_east_africa_distributor',
-      parentPartnerName: 'AfriTech Banking Solutions Ltd',
-      tier: 'sub_partner',
-      revenueSharePercent: 70,
-      subscriptionTier: 'growth',
-      monthlyPlatformFeeUsd: 1499,
-      usageBillingRates: {
-        perActiveWalletUsd: 0.08,
-        perCardIssuedUsd: 0.90,
-        perApiCallUsd: 0.001,
-        bpsOnGmv: 3.5
-      },
-      monthlyThroughputUsd: 4120000,
-      accruedPartnerRevenueUsd: 18450,
-      accruedOmniPlatformShareUsd: 7900
-    },
-    affiliateCampaigns: [
+    domains: [
       {
-        id: 'aff_apex_01',
-        name: 'Village Community Agent Onboarding',
-        referralCode: 'AGRI-AGENT-REWARD',
-        commissionType: 'fixed_per_customer',
-        commissionValue: 5,
-        totalReferrals: 3840,
-        totalAcquisitionGmvUsd: 1950000,
-        totalPayoutUsd: 19200,
-        status: 'active'
-      }
+        domain: 'community.gracefellowship.church',
+        status: 'verified',
+        cnameRecord: 'cname.omni.network',
+        txtVerificationToken: 'omni-verify=grace-church-token',
+        sslIssued: true,
+        sslExpiresAt: '2027-09-30',
+        primaryRedirect: true,
+      },
     ],
+    features: {
+      socialFeed: true,
+      messagingDirect: true,
+      spacesCommunities: true,
+      commerceMarketplace: true,
+      crmDirectory: true,
+      creatorMonetization: true,
+      aiAssistant: true,
+      adsCampaigns: false,
+      eventsWebinars: true,
+      learningLms: true,
+      voiceVideoMeetings: true,
+      knowledgeWiki: false,
+    },
     aiConfig: {
-      assistantName: 'Apex Shamba AI Advisor',
-      assistantAvatarUrl: 'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?w=80',
-      welcomePrompt: 'Habari! I can assist you with your grain harvest payouts, seasonal crop micro-loans, or fertilizer savings.',
-      enabledForRetail: true,
-      enabledForBusiness: true,
-      maxAutonomousRecommendationLimitUsd: 2000,
-      disclaimerText: 'Apex Shamba AI provides weather-adjusted cash flow estimates for agricultural planning.',
-      customKnowledgeDocs: [
-        { id: 'k_agri_01', title: 'Cooperative Dividend Calculation Manual 2026', category: 'Member Rules', wordCount: 950, status: 'indexed' }
+      assistantName: 'Grace Shepherd Copilot',
+      assistantAvatar: 'https://images.unsplash.com/photo-1548625361-195fe578cb27?w=120&auto=format&fit=crop&q=80',
+      personaTone: 'pastoral',
+      knowledgeSources: [
+        { id: 'ks-gr-1', name: 'Scripture Concordance & Sermon Transcripts 2020-2026', type: 'internal_docs', itemCount: 420, lastSynced: '2 days ago', status: 'indexed' },
+        { id: 'ks-gr-2', name: 'Pastoral Care Guidelines & Prayer Request Logs', type: 'crm_tickets', itemCount: 180, lastSynced: 'Today', status: 'indexed' },
       ],
-      financialEducationModules: [
-        { id: 'edu_agri_01', title: 'Managing Seasonal Farm Income & Off-Season Savings', topic: 'Agri-Budgeting', durationMin: 10, targetAudience: 'Smallholder Farmers' }
-      ]
+      customInstructions: 'Speak with pastoral warmth, provide scriptural encouragement, and connect community members to prayer circles and small group mentors.',
+      allowedRoles: ['super_admin', 'dept_admin', 'employee', 'member', 'guest'],
+      publicCustomerFacing: true,
+      tokenMonthlyQuota: 20000000,
+      tokensConsumedThisMonth: 4200000,
     },
-    providers: [
-      { id: 'prov_agri_01', category: 'payment_gateway', providerName: 'M-Pesa Express B2C', adapterType: 'DAR_ES_SALAAM_API', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 3100000 },
-      { id: 'prov_agri_02', category: 'banking_rail', providerName: 'Kenya Clearing House (PesaLink)', adapterType: 'DIRECT_SWITCH', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 980000 }
+    departments: [
+      { id: 'dept-gr-past', name: 'Pastoral Staff & Ministry Leadership', leadName: 'Pastor David Adebayo', leadAvatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80', memberCount: 24, privateSpaceId: 'space-gr-pastoral', unreadCount: 1 },
+      { id: 'dept-gr-worship', name: 'Worship Arts, Media & Broadcast Team', leadName: 'Sarah Jenkins', leadAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80', memberCount: 45, privateSpaceId: 'space-gr-worship', unreadCount: 7 },
+      { id: 'dept-gr-outreach', name: 'Global Missions & Community Pantry', leadName: 'Mateo Hernandez', leadAvatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80', memberCount: 110, privateSpaceId: 'space-gr-missions', unreadCount: 4 },
     ],
-    usersCount: {
-      customers: 24500,
-      businesses: 320,
-      employees: 95,
-      agents: 180
+    billing: {
+      planId: 'starter_community',
+      planName: 'Faith & Non-Profit Tier',
+      monthlyBaseFee: 450,
+      billingCycle: 'monthly',
+      revenueSharePercentToOMNI: 3,
+      usageMeters: {
+        activeUsersCount: 1240,
+        userLimit: 2500,
+        storageUsedGb: 320,
+        storageLimitGb: 2000,
+        aiTokensUsed: 4200000,
+        aiTokenLimit: 20000000,
+        bandwidthGb: 4100,
+      },
+      invoices: [
+        { id: 'inv-gr-0826', period: 'August 2026', amountDue: 450, status: 'paid', pdfUrl: '#' },
+      ],
     },
-    totalAssetsUnderManagementUsd: 12400000,
-    monthlyThroughputUsd: 4120000,
-    auditLogsCount: 2310,
-    createdAt: '2026-01-15T09:00:00Z',
-    updatedAt: '2026-08-18T06:15:00Z'
+    status: 'active',
+    createdAt: '2026-03-10',
+    ownerEmail: 'admin@gracefellowship.church',
+    memberCount: 1240,
+    activeCommunitiesCount: 18,
+    securityCompliance: {
+      soc2Compliant: false,
+      hipaaCompliant: false,
+      gdprCompliant: true,
+      dataResidencyRegion: 'US-East',
+      dataRetentionDays: 180,
+    },
   },
   {
-    id: 'wli_horizon_cu',
-    name: 'Horizon Community Credit Union',
-    slug: 'horizon-cu',
-    category: 'credit_union',
-    status: 'active',
-    country: 'United States',
-    jurisdiction: 'NCUA Insured / US State Chartered',
+    id: 'tenant-nordic-ngo',
+    slug: 'nordic-clean-energy',
+    customerType: 'ngo',
+    ecosystemMode: 'isolated_private',
     branding: {
-      brandName: 'Horizon Credit Union',
-      tagline: 'People Helping People Through Modern Digital Banking',
-      companyLegalName: 'Horizon Federal Credit Union Inc',
-      supportEmail: 'memberservices@horizoncu.org',
-      supportPhone: '+1 800 555 4920',
-      copyrightText: '© 2026 Horizon Credit Union. Federally Insured by NCUA. Powered by OMNI.',
-      logoUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=120&auto=format&fit=crop&q=60',
-      faviconUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=32&auto=format&fit=crop&q=60',
-      mobileConfig: {
-        appTitle: 'Horizon Mobile CU',
-        splashColor: '#1e3a8a',
-        appIconShape: 'circle',
-        appStoreId: 'id149582918',
-        playStoreId: 'org.horizoncu.mobile'
+      brandName: 'Nordic Clean Energy Alliance',
+      tagline: 'Decarbonization, Sovereign Microgrids & Climate Governance',
+      logoUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=150&auto=format&fit=crop&q=80',
+      faviconUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=64&auto=format&fit=crop&q=80',
+      primaryColor: '#10b981',
+      secondaryColor: '#047857',
+      accentColor: '#6ee7b7',
+      surfaceColor: '#0f172a',
+      borderRadius: 'lg',
+      fontFamily: 'Plus Jakarta Sans',
+    },
+    domains: [
+      {
+        domain: 'network.nordiccleanenergy.org',
+        status: 'verified',
+        cnameRecord: 'cname.omni.network',
+        txtVerificationToken: 'omni-verify=nordic-ngo-token',
+        sslIssued: true,
+        sslExpiresAt: '2027-10-01',
+        primaryRedirect: true,
       },
-      emailConfig: {
-        headerLogoUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=150',
-        footerSignature: 'Horizon Member Care • 400 Liberty Ave, Pittsburgh PA 15222',
-        senderName: 'Horizon CU Member Notice',
-        senderEmail: 'statements@horizoncu.org',
-        accentColor: '#3b82f6'
+    ],
+    features: {
+      socialFeed: true,
+      messagingDirect: true,
+      spacesCommunities: true,
+      commerceMarketplace: false,
+      crmDirectory: true,
+      creatorMonetization: false,
+      aiAssistant: true,
+      adsCampaigns: false,
+      eventsWebinars: true,
+      learningLms: true,
+      voiceVideoMeetings: true,
+      knowledgeWiki: true,
+    },
+    aiConfig: {
+      assistantName: 'ClimateGrid Copilot',
+      assistantAvatar: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=120&auto=format&fit=crop&q=80',
+      personaTone: 'analytical',
+      knowledgeSources: [
+        { id: 'ks-nd-1', name: 'IPCC Climate Accord & Nordic Grid Directives', type: 'policy_pdf', itemCount: 95, lastSynced: '3 days ago', status: 'indexed' },
+      ],
+      customInstructions: 'Assist climate scientists, municipal planners, and policy delegates in calculating carbon offset metrics and microgrid power balancing.',
+      allowedRoles: ['super_admin', 'dept_admin', 'employee', 'member'],
+      publicCustomerFacing: false,
+      tokenMonthlyQuota: 30000000,
+      tokensConsumedThisMonth: 8200000,
+    },
+    departments: [
+      { id: 'dept-nd-grid', name: 'Microgrid Engineers & Battery Storage', leadName: 'Astrid Lindholm', leadAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80', memberCount: 52, privateSpaceId: 'space-nd-grid', unreadCount: 2 },
+      { id: 'dept-nd-policy', name: 'EU Energy Policy & Grant Liaisons', leadName: 'Henrik Vang', leadAvatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&auto=format&fit=crop&q=80', memberCount: 34, privateSpaceId: 'space-nd-policy', unreadCount: 0 },
+    ],
+    billing: {
+      planId: 'growth_organization',
+      planName: 'NGO Mission Tier',
+      monthlyBaseFee: 1200,
+      billingCycle: 'annual',
+      revenueSharePercentToOMNI: 0,
+      usageMeters: {
+        activeUsersCount: 285,
+        userLimit: 1000,
+        storageUsedGb: 450,
+        storageLimitGb: 3000,
+        aiTokensUsed: 8200000,
+        aiTokenLimit: 30000000,
+        bandwidthGb: 1900,
       },
-      notificationConfig: {
-        pushTitlePrefix: '[Horizon CU]',
-        smsSenderId: 'HORIZONCU',
-        enablePush: true,
-        enableSms: true
-      },
-      cardConfig: {
-        cardArtStyle: 'gradient_lux',
-        customBinPrefix: '482910',
-        cardProgramName: 'Horizon Rewards Visa Debit',
-        embossedNameDefault: 'MEMBER SINCE 2020'
-      }
+      invoices: [
+        { id: 'inv-nd-0826', period: 'August 2026', amountDue: 1200, status: 'paid', pdfUrl: '#' },
+      ],
+    },
+    status: 'active',
+    createdAt: '2026-02-18',
+    ownerEmail: 'director@nordiccleanenergy.org',
+    memberCount: 285,
+    activeCommunitiesCount: 12,
+    securityCompliance: {
+      soc2Compliant: true,
+      hipaaCompliant: false,
+      gdprCompliant: true,
+      dataResidencyRegion: 'EU-Central',
+      dataRetentionDays: 365,
+    },
+  },
+];
+
+export const SEED_ENTERPRISE_MEMBERS: EnterpriseMember[] = [
+  {
+    id: 'mem-1',
+    tenantId: 'tenant-aegis-corp',
+    fullName: 'Dr. Elena Rostova',
+    email: 'e.rostova@aegisquantum.io',
+    title: 'VP of Quantum Hardware',
+    departmentId: 'dept-eng',
+    role: 'dept_admin',
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+    status: 'active',
+    joinedDate: '2026-01-15',
+    lastActive: '3 mins ago',
+    twoFactorEnabled: true,
+    ssoLinked: true,
+  },
+  {
+    id: 'mem-2',
+    tenantId: 'tenant-aegis-corp',
+    fullName: 'Marcus Thorne',
+    email: 'm.thorne@aegisquantum.io',
+    title: 'Lead Security Architect & CISO',
+    departmentId: 'dept-sec',
+    role: 'tenant_owner',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+    status: 'active',
+    joinedDate: '2026-01-15',
+    lastActive: 'Just now',
+    twoFactorEnabled: true,
+    ssoLinked: true,
+  },
+  {
+    id: 'mem-3',
+    tenantId: 'tenant-aegis-corp',
+    fullName: 'Kavita Singh',
+    email: 'k.singh@aegisquantum.io',
+    title: 'Principal Commercial Architect',
+    departmentId: 'dept-prod',
+    role: 'dept_admin',
+    avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
+    status: 'active',
+    joinedDate: '2026-01-20',
+    lastActive: '12 mins ago',
+    twoFactorEnabled: true,
+    ssoLinked: true,
+  },
+  {
+    id: 'mem-4',
+    tenantId: 'tenant-aegis-corp',
+    fullName: 'David Sterling',
+    email: 'd.sterling@aegisquantum.io',
+    title: 'Senior Cryptographic Engineer',
+    departmentId: 'dept-eng',
+    role: 'member',
+    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+    status: 'active',
+    joinedDate: '2026-02-01',
+    lastActive: '45 mins ago',
+    twoFactorEnabled: true,
+    ssoLinked: true,
+  },
+  {
+    id: 'mem-5',
+    tenantId: 'tenant-aegis-corp',
+    fullName: 'Sarah Vance',
+    email: 's.vance@defense-partner.gov',
+    title: 'Government Liaison Auditor',
+    departmentId: 'dept-sec',
+    role: 'external_partner',
+    avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
+    status: 'active',
+    joinedDate: '2026-03-01',
+    lastActive: '2 hours ago',
+    twoFactorEnabled: true,
+    ssoLinked: false,
+  },
+];
+
+export const SEED_ENTERPRISE_ANNOUNCEMENTS: EnterpriseAnnouncement[] = [
+  {
+    id: 'ann-1',
+    tenantId: 'tenant-aegis-corp',
+    title: 'Q3 Enterprise Townhall: Sovereign Autonomous Mesh Launch',
+    summary: 'Join CEO Arthur Sterling and the executive committee for the global broadcast detailing Q3 achievements and upcoming enterprise deliveries.',
+    body: 'The townhall will be streamed across all encrypted enterprise nodes. We will review our latest SOC2 Type II renewal, quantum key distribution breakthroughs, and roadmap for Q4.',
+    authorName: 'Arthur Sterling',
+    authorRole: 'Chief Executive Officer',
+    authorAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80',
+    priority: 'urgent_critical',
+    targetAudience: 'all_organization',
+    publishedAt: '2 hours ago',
+    acknowledgmentsCount: 284,
+    pinned: true,
+  },
+  {
+    id: 'ann-2',
+    tenantId: 'tenant-aegis-corp',
+    title: 'Mandatory Quantum Security Protocol Update (QSP-9)',
+    summary: 'All hardware nodes and developer credentials must upgrade to multi-factor post-quantum signature verification by Friday EOD.',
+    body: 'Please visit the Security Runbook in the Knowledge Wiki to run the one-command validation script. Contact the Red Team in #sec-ops with any issues.',
+    authorName: 'Marcus Thorne',
+    authorRole: 'Lead Security Architect & CISO',
+    authorAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+    priority: 'important',
+    targetAudience: 'all_organization',
+    publishedAt: 'Yesterday',
+    acknowledgmentsCount: 198,
+    pinned: false,
+  },
+];
+
+export const SEED_ENTERPRISE_KNOWLEDGE_DOCS: EnterpriseKnowledgeDoc[] = [
+  {
+    id: 'doc-1',
+    tenantId: 'tenant-aegis-corp',
+    title: 'Aegis Quantum Lattice Encryption Architecture v4.2',
+    category: 'Engineering',
+    snippet: 'Comprehensive specification of the lattice-based post-quantum cryptographic primitives securing enterprise data pipelines.',
+    content: 'This specification outlines the mathematical foundations of our post-quantum key encapsulation mechanism (KEM). All intra-node communication employs Kyber-1024 with zero state retention.',
+    authorName: 'Dr. Elena Rostova',
+    version: '4.2.1',
+    lastUpdated: 'August 14, 2026',
+    accessLevel: 'public_to_tenant',
+    views: 1420,
+    aiGroundingEnabled: true,
+  },
+  {
+    id: 'doc-2',
+    tenantId: 'tenant-aegis-corp',
+    title: 'ITAR & SOC2 Incident Response Playbook',
+    category: 'Security & Compliance',
+    snippet: 'Step-by-step containment, root-cause forensics, and regulatory reporting procedures for enterprise security incidents.',
+    content: 'In the event of a flagged anomalous telemetry threshold: 1. Isolate the edge gateway node immediately. 2. Notify the CISO and legal audit team within 15 minutes. 3. Export cryptographic audit hashes.',
+    authorName: 'Marcus Thorne',
+    version: '2.0.0',
+    lastUpdated: 'August 02, 2026',
+    accessLevel: 'confidential_exec',
+    views: 430,
+    aiGroundingEnabled: true,
+  },
+  {
+    id: 'doc-3',
+    tenantId: 'tenant-aegis-corp',
+    title: 'Enterprise Remote Work, Security Hygiene & Device Policy',
+    category: 'HR & Culture',
+    snippet: 'Guidelines for operating securely in remote and hybrid environments using sovereign OMNI hardware tokens.',
+    content: 'All remote employees must connect via dedicated hardware security keys. Unapproved third-party SaaS tools are strictly blocked at the DNS level.',
+    authorName: 'Arthur Sterling',
+    version: '1.4',
+    lastUpdated: 'July 28, 2026',
+    accessLevel: 'public_to_tenant',
+    views: 890,
+    aiGroundingEnabled: true,
+  },
+];
+
+export const SEED_ENTERPRISE_PARTNERS: EnterprisePartnerNetwork[] = [
+  {
+    id: 'part-1',
+    tenantId: 'tenant-aegis-corp',
+    partnerOrgName: 'Lockheed Defense Advanced Lab',
+    contactPerson: 'Cmdr. James Vance',
+    contactEmail: 'j.vance@lockheed-adv.gov',
+    partnerType: 'Vendor',
+    sharedSpacesCount: 3,
+    status: 'active_federation',
+    crossOrgDMsAllowed: true,
+  },
+  {
+    id: 'part-2',
+    tenantId: 'tenant-aegis-corp',
+    partnerOrgName: 'MIT Quantum Computation Lab',
+    contactPerson: 'Prof. Linus Zhang',
+    contactEmail: 'lzhang@mit.edu',
+    partnerType: 'Academic Co-op',
+    sharedSpacesCount: 1,
+    status: 'active_federation',
+    crossOrgDMsAllowed: true,
+  },
+  {
+    id: 'part-3',
+    tenantId: 'tenant-aegis-corp',
+    partnerOrgName: 'Nordic Sovereign Microgrid Consortium',
+    contactPerson: 'Astrid Lindholm',
+    contactEmail: 'a.lindholm@nordicgrid.org',
+    partnerType: 'Affiliate',
+    sharedSpacesCount: 2,
+    status: 'pending_handshake',
+    crossOrgDMsAllowed: false,
+  },
+];
+
+export const SEED_TENANT_AUDIT_LOGS: TenantAuditLog[] = [
+  {
+    id: 'log-1',
+    tenantId: 'tenant-aegis-corp',
+    timestamp: '2026-08-20 11:42:09 UTC',
+    actorEmail: 'm.thorne@aegisquantum.io',
+    actorRole: 'tenant_owner',
+    action: 'POLICY_UPDATE_ENFORCED',
+    targetResource: 'rbac.quantum.isolation_rules',
+    ipAddress: '192.168.4.102 (Internal Gateway)',
+    status: 'success',
+    cryptographicHash: '0x8f4c91a7e2b834419918a20349bc98124501a39fbc8012678129038491024819',
+  },
+  {
+    id: 'log-2',
+    tenantId: 'tenant-aegis-corp',
+    timestamp: '2026-08-20 10:15:32 UTC',
+    actorEmail: 'e.rostova@aegisquantum.io',
+    actorRole: 'dept_admin',
+    action: 'KNOWLEDGE_DOC_PUBLISHED',
+    targetResource: 'doc-1 (Quantum Lattice Specs)',
+    ipAddress: '10.0.8.44 (Hardware Lab)',
+    status: 'success',
+    cryptographicHash: '0x12a9bc4891002348579124018239048123049182394018239048120349812034',
+  },
+  {
+    id: 'log-3',
+    tenantId: 'tenant-aegis-corp',
+    timestamp: '2026-08-20 09:02:11 UTC',
+    actorEmail: 'unauthorized_probe@external.net',
+    actorRole: 'anonymous',
+    action: 'CROSS_TENANT_READ_ATTEMPT',
+    targetResource: 'tenant-aegis-corp/internal_spaces',
+    ipAddress: '45.12.89.201 (External IP)',
+    status: 'denied',
+    cryptographicHash: '0xdeadbeef10293847561029384756102938475610293847561029384756102938',
+  },
+  {
+    id: 'log-4',
+    tenantId: 'tenant-aegis-corp',
+    timestamp: '2026-08-19 18:30:00 UTC',
+    actorEmail: 'billing-system@omni.network',
+    actorRole: 'system_service',
+    action: 'USAGE_METER_RECORDED',
+    targetResource: 'ai_tokens: 14.82M / 50M',
+    ipAddress: '10.200.0.1 (OMNI Core Ledger)',
+    status: 'success',
+    cryptographicHash: '0x77cba09182309481203481209384102934810293481029348102934810293481',
+  },
+];
+
+export const SEED_WHITE_LABEL_TEST_SUITE: WhiteLabelTestSuiteResult[] = [
+  {
+    id: 'TEST_TENANT_ISOLATION_BOUNDARY',
+    name: 'Multi-Tenant Cryptographic Isolation & Zero Leakage',
+    category: 'isolation',
+    status: 'passed',
+    details: 'Verified strict partition across Aegis Corp and Oxford Academy. Cross-tenant DB queries return empty set and generate flagged audit events.',
+    executionMs: 14,
+  },
+  {
+    id: 'TEST_CUSTOM_BRANDING_ENGINE',
+    name: 'Real-Time Dynamic Theme & CSS Variable Injection',
+    category: 'branding',
+    status: 'passed',
+    details: 'Verified dynamic primary/secondary color injection, custom typography token switches, and mobile splash screen asset hydration.',
+    executionMs: 8,
+  },
+  {
+    id: 'TEST_CUSTOM_DOMAIN_DNS_ROUTING',
+    name: 'Custom Domain Routing & Automatic SSL Handshake',
+    category: 'dns_routing',
+    status: 'passed',
+    details: 'Verified connect.aegisquantum.io and campus.oxford-polymathic.edu CNAME routing with automated Let’s Encrypt certificate renewal.',
+    executionMs: 22,
+  },
+  {
+    id: 'TEST_ENTERPRISE_RBAC_HIERARCHY',
+    name: 'Enterprise RBAC & Departmental Space Permissions',
+    category: 'rbac',
+    status: 'passed',
+    details: 'Validated role hierarchies: Tenant Owner, Dept Admin, Employee, External Partner, and Guest with least-privilege enforcement.',
+    executionMs: 11,
+  },
+  {
+    id: 'TEST_BILLING_USAGE_METER_CALCULATIONS',
+    name: 'Tiered Billing, AI Token Meters & Reseller Commission',
+    category: 'billing',
+    status: 'passed',
+    details: 'Verified real-time metering for active users, storage GB, AI tokens, and automated invoice PDF generation with 5% OMNI RevShare.',
+    executionMs: 16,
+  },
+  {
+    id: 'TEST_ECOSYSTEM_FEDERATION_TOGGLE',
+    name: 'Private Isolated vs. Public OMNI Federation Switch',
+    category: 'federation',
+    status: 'passed',
+    details: 'Validated instant switch between isolated sovereign network mode and federated global discovery pool with seamless token verification.',
+    executionMs: 18,
+  },
+];
+
+// ============================================================================
+// FINANCIAL INSTITUTION WHITE LABEL SEED DATA (For Finance OS compatibility)
+// ============================================================================
+
+export const SEED_WHITE_LABEL_INSTITUTIONS: any[] = [
+  {
+    id: 'inst-swiss-vault',
+    name: 'Helvetia Sovereign Wealth & Private Bank',
+    slug: 'helvetia-private',
+    category: 'commercial_bank',
+    status: 'active',
+    country: 'Switzerland',
+    jurisdiction: 'FINMA (Swiss Financial Market Supervisory Authority)',
+    branding: {
+      brandName: 'Helvetia Sovereign',
+      tagline: 'Private Wealth & Asset Custody',
+      logoUrl: 'https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=120&auto=format&fit=crop&q=80',
+      faviconUrl: 'https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=64&auto=format&fit=crop&q=80',
+      primaryColor: '#0f172a',
+      secondaryColor: '#1e293b',
+      accentColor: '#d97706',
+      surfaceColor: '#ffffff',
+      supportEmail: 'concierge@helvetia-private.ch',
+      supportPhone: '+41 22 819 9000',
     },
     theme: {
-      primaryColor: '#2563eb',
-      secondaryColor: '#0284c7',
-      accentColor: '#10b981',
-      surfaceColor: '#1e293b',
-      textColor: '#f8fafc',
-      fontFamily: 'Outfit',
-      borderRadius: 'rounded-2xl',
-      colorMode: 'light'
-    },
-    products: {
-      wallet: true,
-      payments: true,
-      fx: true,
-      cards: true,
-      invoices: false,
-      payroll: true,
-      businessFinance: true,
-      treasury: true,
-      aiFinance: true,
-      marketplacePayments: false,
-      developerApis: false
-    },
-    financialRules: {
-      transactionFeePercent: 0.0,
-      fixedFeePerTxUsd: 0.0,
-      interchangeMarkupBps: 15,
-      fxSpreadMarkupBps: 20,
-      singleTxLimitUsd: 50000,
-      dailyVelocityLimitUsd: 100000,
-      monthlyThroughputLimitUsd: 15000000,
-      supportedCurrencies: ['USD', 'CAD', 'EUR', 'GBP'],
-      operatingCountries: ['US', 'CA'],
-      approvalRules: [
-        { minAmountUsd: 15000, requiredSigners: 2, roleRequired: 'loan_officer' }
-      ],
-      complianceTierRequired: 'tier_2_verified_individual',
-      transactionPolicies: {
-        allowInternationalWires: true,
-        allowCryptoRail: false,
-        instantSettlementEnabled: true,
-        weekendProcessing: true
-      }
-    },
-    domain: {
-      subdomain: 'horizoncu',
-      customDomain: 'online.horizoncu.org',
-      sslStatus: 'provisioned',
-      dnsRecords: [
-        { type: 'CNAME', host: 'online.horizoncu.org', value: 'cname.finance.omni.com', status: 'verified' }
-      ]
-    },
-    reseller: {
-      resellerId: 'res_omni_us_direct',
-      parentPartnerName: 'OMNI Financial North America',
-      tier: 'direct_institution',
-      revenueSharePercent: 80,
-      subscriptionTier: 'enterprise_scale',
-      monthlyPlatformFeeUsd: 3499,
-      usageBillingRates: {
-        perActiveWalletUsd: 0.10,
-        perCardIssuedUsd: 1.10,
-        perApiCallUsd: 0.001,
-        bpsOnGmv: 3.0
-      },
-      monthlyThroughputUsd: 9400000,
-      accruedPartnerRevenueUsd: 31200,
-      accruedOmniPlatformShareUsd: 7800
-    },
-    affiliateCampaigns: [],
-    aiConfig: {
-      assistantName: 'Horizon Financial Guide',
-      assistantAvatarUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=80',
-      welcomePrompt: 'Hello Member! How can I help you check your dividend rate, apply for an auto loan, or setup auto-save?',
-      enabledForRetail: true,
-      enabledForBusiness: true,
-      maxAutonomousRecommendationLimitUsd: 25000,
-      disclaimerText: 'Horizon Financial Guide provides educational loan calculations and rate comparisons.',
-      customKnowledgeDocs: [
-        { id: 'k_hcu_01', title: 'NCUA Deposit Insurance Coverage Limits & Rules', category: 'Insurance', wordCount: 1800, status: 'indexed' }
-      ],
-      financialEducationModules: [
-        { id: 'edu_hcu_01', title: 'Building Credit Score from 580 to 750+', topic: 'Credit Health', durationMin: 14, targetAudience: 'Retail Members' }
-      ]
-    },
-    providers: [
-      { id: 'prov_hcu_01', category: 'banking_rail', providerName: 'FedNow Instant Rail', adapterType: 'FED_DIRECT_API', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 6200000 },
-      { id: 'prov_hcu_02', category: 'banking_rail', providerName: 'Evolve Bank & Trust Core', adapterType: 'CORE_SYNC_V3', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 3200000 }
-    ],
-    usersCount: {
-      customers: 18600,
-      businesses: 890,
-      employees: 140,
-      agents: 12
-    },
-    totalAssetsUnderManagementUsd: 92000000,
-    monthlyThroughputUsd: 9400000,
-    auditLogsCount: 3140,
-    createdAt: '2025-08-20T11:00:00Z',
-    updatedAt: '2026-08-18T05:00:00Z'
-  },
-  {
-    id: 'wli_gov_disburse',
-    name: 'GovDisburse National Portal',
-    slug: 'govdisburse',
-    category: 'government_payment',
-    status: 'active',
-    country: 'Federal Jurisdiction',
-    jurisdiction: 'Treasury & Sovereign Comptroller Authorized',
-    branding: {
-      brandName: 'National Treasury Direct',
-      tagline: 'Sovereign Citizen Benefits & Government Vendor Disbursements',
-      companyLegalName: 'Federal Treasury Department Financial Portal',
-      supportEmail: 'inquiries@disburse.treasury.gov',
-      supportPhone: '+1 800 829 1040',
-      copyrightText: 'Official Sovereign Government Portal. Powered by OMNI Institutional FaaS Core.',
-      logoUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=120&auto=format&fit=crop&q=60',
-      faviconUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=32&auto=format&fit=crop&q=60',
-      mobileConfig: {
-        appTitle: 'GovPay Citizen',
-        splashColor: '#1e293b',
-        appIconShape: 'rounded_square',
-        appStoreId: 'id150918241',
-        playStoreId: 'gov.treasury.disburse'
-      },
-      emailConfig: {
-        headerLogoUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=150',
-        footerSignature: 'Government Disbursement Office • Washington DC',
-        senderName: 'Federal Disbursement Notice',
-        senderEmail: 'official-notice@disburse.treasury.gov',
-        accentColor: '#0f766e'
-      },
-      notificationConfig: {
-        pushTitlePrefix: '[Official Gov Notice]',
-        smsSenderId: 'USGOVPAY',
+      colorScheme: 'obsidian_dark',
+      fontFamily: 'Inter',
+      borderRadius: 'md',
+      navigationLayout: 'sidebar_full',
+      notificationChannels: {
+        emailSenderName: 'Helvetia Private Banking',
+        smsSenderId: 'HELVETIA',
         enablePush: true,
-        enableSms: true
+        enableSms: true,
       },
       cardConfig: {
         cardArtStyle: 'metallic_gold',
-        customBinPrefix: '400091',
-        cardProgramName: 'Federal Direct Citizen Debit',
-        embossedNameDefault: 'CITIZEN BENEFICIARY'
-      }
-    },
-    theme: {
-      primaryColor: '#0f766e',
-      secondaryColor: '#1e293b',
-      accentColor: '#f59e0b',
-      surfaceColor: '#0f172a',
-      textColor: '#f8fafc',
-      fontFamily: 'Inter',
-      borderRadius: 'rounded-md',
-      colorMode: 'dark'
-    },
-    products: {
-      wallet: true,
-      payments: true,
-      fx: false,
-      cards: true,
-      invoices: true,
-      payroll: true,
-      businessFinance: true,
-      treasury: true,
-      aiFinance: true,
-      marketplacePayments: false,
-      developerApis: true
-    },
-    financialRules: {
-      transactionFeePercent: 0.0,
-      fixedFeePerTxUsd: 0.0,
-      interchangeMarkupBps: 0,
-      fxSpreadMarkupBps: 0,
-      singleTxLimitUsd: 10000000,
-      dailyVelocityLimitUsd: 50000000,
-      monthlyThroughputLimitUsd: 250000000,
-      supportedCurrencies: ['USD'],
-      operatingCountries: ['US'],
-      approvalRules: [
-        { minAmountUsd: 500000, requiredSigners: 3, roleRequired: 'auditor_general' }
-      ],
-      complianceTierRequired: 'tier_5_institutional_sovereign',
-      transactionPolicies: {
-        allowInternationalWires: false,
-        allowCryptoRail: false,
-        instantSettlementEnabled: true,
-        weekendProcessing: true
-      }
-    },
-    domain: {
-      subdomain: 'govdisburse',
-      customDomain: 'disburse.treasury.gov',
-      sslStatus: 'provisioned',
-      dnsRecords: [
-        { type: 'CNAME', host: 'disburse.treasury.gov', value: 'cname.finance.omni.com', status: 'verified' }
-      ]
-    },
-    reseller: {
-      resellerId: 'res_sovereign_procurement',
-      parentPartnerName: 'OMNI Sovereign Infrastructure',
-      tier: 'direct_institution',
-      revenueSharePercent: 90,
-      subscriptionTier: 'sovereign_custom',
-      monthlyPlatformFeeUsd: 15000,
-      usageBillingRates: {
-        perActiveWalletUsd: 0.05,
-        perCardIssuedUsd: 0.75,
-        perApiCallUsd: 0.0005,
-        bpsOnGmv: 0.5
+        customBinPrefix: '402948',
+        cardProgramName: 'Helvetia Obsidian Infinite',
+        embossedNameDefault: 'VALUED CLIENT',
       },
-      monthlyThroughputUsd: 182000000,
-      accruedPartnerRevenueUsd: 125000,
-      accruedOmniPlatformShareUsd: 13800
-    },
-    affiliateCampaigns: [],
-    aiConfig: {
-      assistantName: 'Citizen Benefits AI Assistant',
-      assistantAvatarUrl: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=80',
-      welcomePrompt: 'Welcome to National Treasury Direct. I can help verify your pension, child tax credit, or vendor invoice status.',
-      enabledForRetail: true,
-      enabledForBusiness: true,
-      maxAutonomousRecommendationLimitUsd: 0,
-      disclaimerText: 'Citizen Benefits AI is strictly informational and refers all statutory claims to the Comptroller.',
-      customKnowledgeDocs: [
-        { id: 'k_gov_01', title: 'Federal Direct Express Benefit Schedule 2026', category: 'Statutory Policy', wordCount: 4200, status: 'indexed' }
-      ],
-      financialEducationModules: [
-        { id: 'edu_gov_01', title: 'Understanding Your Social Security & Direct Deposit Protection', topic: 'Public Benefits', durationMin: 8, targetAudience: 'Beneficiaries' }
-      ]
-    },
-    providers: [
-      { id: 'prov_gov_01', category: 'banking_rail', providerName: 'Fedwire / FedNow Direct Access', adapterType: 'FED_DIRECT_CLEARED', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 182000000 }
-    ],
-    usersCount: {
-      customers: 210000,
-      businesses: 5800,
-      employees: 3200,
-      agents: 450
-    },
-    totalAssetsUnderManagementUsd: 650000000,
-    monthlyThroughputUsd: 182000000,
-    auditLogsCount: 15800,
-    createdAt: '2025-05-01T08:00:00Z',
-    updatedAt: '2026-08-18T07:45:00Z'
-  },
-  {
-    id: 'wli_stratos_fintech',
-    name: 'Stratos Fintech Capital',
-    slug: 'stratos',
-    category: 'fintech',
-    status: 'active',
-    country: 'Singapore / APAC',
-    jurisdiction: 'MAS Major Payment Institution (MPI)',
-    branding: {
-      brandName: 'Stratos Capital',
-      tagline: 'High-Velocity B2B Working Capital & Invoicing Platform',
-      companyLegalName: 'Stratos Financial Technologies Pte Ltd',
-      supportEmail: 'ops@stratos.sg',
-      supportPhone: '+65 6789 0123',
-      copyrightText: '© 2026 Stratos Capital Pte Ltd. Regulated by Monetary Authority of Singapore.',
-      logoUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=120&auto=format&fit=crop&q=60',
-      faviconUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=32&auto=format&fit=crop&q=60',
-      mobileConfig: {
-        appTitle: 'Stratos Corporate',
-        splashColor: '#18181b',
-        appIconShape: 'squircle',
-        appStoreId: 'id15940291',
-        playStoreId: 'sg.stratos.app'
-      },
-      emailConfig: {
-        headerLogoUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=150',
-        footerSignature: 'Stratos APAC Operations • Marina Bay Financial Centre, Singapore',
-        senderName: 'Stratos Capital Dispatch',
-        senderEmail: 'statements@stratos.sg',
-        accentColor: '#f43f5e'
-      },
-      notificationConfig: {
-        pushTitlePrefix: '[Stratos Pay]',
-        smsSenderId: 'STRATOS',
-        enablePush: true,
-        enableSms: true
-      },
-      cardConfig: {
-        cardArtStyle: 'neon_cyber',
-        customBinPrefix: '519284',
-        cardProgramName: 'Stratos Black Executive Card',
-        embossedNameDefault: 'MANAGING DIRECTOR'
-      }
-    },
-    theme: {
-      primaryColor: '#e11d48',
-      secondaryColor: '#f43f5e',
-      accentColor: '#10b981',
-      surfaceColor: '#09090b',
-      textColor: '#fafafa',
-      fontFamily: 'Plus Jakarta Sans',
-      borderRadius: 'rounded-xl',
-      colorMode: 'dark'
     },
     products: {
       wallet: true,
@@ -692,166 +744,113 @@ export const SEED_WHITE_LABEL_INSTITUTIONS: WhiteLabelInstitutionTenant[] = [
       treasury: true,
       aiFinance: true,
       marketplacePayments: true,
-      developerApis: true
+      developerApis: true,
     },
     financialRules: {
-      transactionFeePercent: 0.25,
-      fixedFeePerTxUsd: 0.35,
-      interchangeMarkupBps: 45,
-      fxSpreadMarkupBps: 25,
-      singleTxLimitUsd: 250000,
-      dailyVelocityLimitUsd: 1000000,
-      monthlyThroughputLimitUsd: 40000000,
-      supportedCurrencies: ['SGD', 'USD', 'EUR', 'GBP', 'AUD', 'JPY', 'HKD', 'CNY', 'USDC'],
-      operatingCountries: ['SG', 'HK', 'AU', 'JP', 'US'],
+      transactionFeePercent: 0.15,
+      fixedFeePerTxUsd: 1.5,
+      interchangeMarkupBps: 25,
+      fxSpreadMarkupBps: 18,
+      singleTxLimitUsd: 5000000,
+      dailyVelocityLimitUsd: 25000000,
+      monthlyThroughputLimitUsd: 250000000,
+      supportedCurrencies: ['CHF', 'USD', 'EUR', 'GBP', 'SGD', 'JPY'],
+      operatingCountries: ['CH', 'LI', 'LU', 'GB', 'SG', 'US'],
       approvalRules: [
-        { minAmountUsd: 50000, requiredSigners: 2, roleRequired: 'risk_director' }
+        { minAmountUsd: 250000, requiredSigners: 2, roleRequired: 'cfo' },
       ],
-      complianceTierRequired: 'tier_4_corporate_kyb',
+      complianceTierRequired: 'tier_3_institutional',
       transactionPolicies: {
         allowInternationalWires: true,
         allowCryptoRail: true,
         instantSettlementEnabled: true,
-        weekendProcessing: true
-      }
+        weekendProcessing: true,
+      },
     },
     domain: {
-      subdomain: 'stratos',
-      customDomain: 'app.stratos.sg',
+      subdomain: 'helvetia.omni-finance.com',
+      customDomain: 'banking.helvetia-private.ch',
       sslStatus: 'provisioned',
       dnsRecords: [
-        { type: 'CNAME', host: 'app.stratos.sg', value: 'cname.finance.omni.com', status: 'verified' }
-      ]
+        { type: 'CNAME', host: 'banking', value: 'cname.omni-finance.com', status: 'verified' },
+      ],
     },
     reseller: {
-      resellerId: 'res_apac_venture',
-      parentPartnerName: 'APAC FinTech Accelerate Corp',
+      resellerId: 'res-master-eu-01',
+      parentPartnerName: 'Alpine FinTech Alliance',
       tier: 'master_reseller',
       revenueSharePercent: 80,
-      subscriptionTier: 'enterprise_scale',
-      monthlyPlatformFeeUsd: 6999,
+      subscriptionTier: 'sovereign_custom',
+      monthlyPlatformFeeUsd: 12500,
       usageBillingRates: {
-        perActiveWalletUsd: 0.15,
-        perCardIssuedUsd: 1.50,
-        perApiCallUsd: 0.002,
-        bpsOnGmv: 5.0
+        perActiveWalletUsd: 1.25,
+        perCardIssuedUsd: 3.5,
+        perApiCallUsd: 0.0004,
+        bpsOnGmv: 2.5,
       },
-      monthlyThroughputUsd: 21500000,
-      accruedPartnerRevenueUsd: 68400,
-      accruedOmniPlatformShareUsd: 17100
+      monthlyThroughputUsd: 84500000,
+      accruedPartnerRevenueUsd: 21125,
+      accruedOmniPlatformShareUsd: 5281,
     },
-    affiliateCampaigns: [
-      {
-        id: 'aff_stratos_01',
-        name: 'Venture Capital Portfolio SaaS Perk',
-        referralCode: 'STRATOS-VC-PASS',
-        commissionType: 'bps_on_volume',
-        commissionValue: 12,
-        totalReferrals: 76,
-        totalAcquisitionGmvUsd: 5400000,
-        totalPayoutUsd: 6480,
-        status: 'active'
-      }
-    ],
+    affiliateCampaigns: [],
     aiConfig: {
-      assistantName: 'Stratos Capital Copilot',
-      assistantAvatarUrl: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=80',
-      welcomePrompt: 'Welcome to Stratos Capital. Ready to evaluate your invoice factoring liquidity or APAC currency routes?',
+      assistantName: 'Helvetia Private Banker AI',
+      assistantAvatarUrl: 'https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=100&auto=format&fit=crop&q=80',
+      welcomePrompt: 'Welcome to your private wealth portal. How may I assist your portfolio today?',
       enabledForRetail: false,
       enabledForBusiness: true,
-      maxAutonomousRecommendationLimitUsd: 100000,
-      disclaimerText: 'Stratos AI calculates real-time receivables factoring discounts based on buyer credit metrics.',
-      customKnowledgeDocs: [
-        { id: 'k_str_01', title: 'APAC Cross-Border PayNow & Fast Settlement Guide', category: 'FX & Rail', wordCount: 2200, status: 'indexed' }
-      ],
-      financialEducationModules: [
-        { id: 'edu_str_01', title: 'Cross-Border Supply Chain Finance in Southeast Asia', topic: 'Trade Finance', durationMin: 18, targetAudience: 'Enterprise CFOs' }
-      ]
+      maxAutonomousRecommendationLimitUsd: 1000000,
+      disclaimerText: 'Private banking and asset allocation information only. Not solicitation of securities.',
+      customKnowledgeDocs: [],
+      financialEducationModules: [],
     },
     providers: [
-      { id: 'prov_str_01', category: 'banking_rail', providerName: 'Singapore FAST / PayNow', adapterType: 'MAS_DIRECT_FAST', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 12400000 },
-      { id: 'prov_str_02', category: 'fx_liquidity', providerName: 'LMAX Institutional FX', adapterType: 'FIX_ENGINE', status: 'connected', isDefault: true, monthlyVolumeProcessedUsd: 9100000 }
+      {
+        id: 'prov-six-swiss',
+        category: 'banking_rail',
+        providerName: 'SIX Interbank Clearing (SIC)',
+        adapterType: 'native_iso20022',
+        status: 'connected',
+        isDefault: true,
+        monthlyVolumeProcessedUsd: 52000000,
+      },
     ],
     usersCount: {
-      customers: 3400,
-      businesses: 920,
-      employees: 380,
-      agents: 15
+      customers: 1420,
+      businesses: 340,
+      employees: 68,
+      agents: 12,
     },
-    totalAssetsUnderManagementUsd: 110000000,
-    monthlyThroughputUsd: 21500000,
-    auditLogsCount: 5240,
-    createdAt: '2025-09-12T07:00:00Z',
-    updatedAt: '2026-08-18T08:10:00Z'
-  }
+    totalAssetsUnderManagementUsd: 4850000000,
+    monthlyThroughputUsd: 84500000,
+    auditLogsCount: 4120,
+    createdAt: '2025-01-15',
+    updatedAt: '2026-08-20',
+  },
 ];
 
-export const SEED_WHITE_LABEL_USERS: WhiteLabelTenantUser[] = [
+export const SEED_WHITE_LABEL_USERS: any[] = [
   {
-    id: 'usr_wl_01',
-    userType: 'business',
-    name: 'Acme Robotics UK Ltd',
-    email: 'finance@acmerobotics.co.uk',
-    role: 'Managing Director',
-    walletBalanceUsd: 184500.00,
-    kycStatus: 'verified',
-    status: 'active',
-    joinedDate: '2026-02-10'
-  },
-  {
-    id: 'usr_wl_02',
+    id: 'user-wl-01',
     userType: 'customer',
-    name: 'Alexander Sterling',
-    email: 'a.sterling@monaco.me',
-    role: 'Private Wealth Client',
-    walletBalanceUsd: 62000.00,
+    name: 'Baroness Vivienne von Greyerz',
+    email: 'v.greyerz@genevacapital.ch',
+    role: 'Private Client',
+    walletBalanceUsd: 2450000,
     kycStatus: 'verified',
     status: 'active',
-    joinedDate: '2026-03-01'
+    joinedDate: '2025-03-10',
   },
-  {
-    id: 'usr_wl_03',
-    userType: 'employee',
-    name: 'Dr. Evelyn Vance',
-    email: 'evelyn.vance@novapay.global',
-    role: 'Chief Compliance Officer',
-    walletBalanceUsd: 14200.00,
-    kycStatus: 'verified',
-    status: 'active',
-    joinedDate: '2025-11-15'
-  },
-  {
-    id: 'usr_wl_04',
-    userType: 'agent',
-    name: 'Kipchoge Farming Agency Branch #04',
-    email: 'eldoret.branch@apexagri.coop',
-    role: 'Regional Float Agent',
-    walletBalanceUsd: 8400.00,
-    kycStatus: 'verified',
-    status: 'active',
-    joinedDate: '2026-01-20'
-  },
-  {
-    id: 'usr_wl_05',
-    userType: 'business',
-    name: 'Singapore Maritime Fleet Logistics Pte',
-    email: 'treasury@sgmaritime.sg',
-    role: 'Corporate Treasurer',
-    walletBalanceUsd: 490000.00,
-    kycStatus: 'verified',
-    status: 'active',
-    joinedDate: '2025-10-05'
-  }
 ];
 
-export const SEED_AVAILABLE_PROVIDERS_CATALOG = [
-  { id: 'cat_stripe', name: 'Stripe Direct', category: 'payment_gateway', description: 'Global credit card, Apple Pay, Google Pay & local checkout rails', adapter: 'REST_V2' },
-  { id: 'cat_adyen', name: 'Adyen Global', category: 'payment_gateway', description: 'Unified multi-channel commerce & omnichannel point-of-sale', adapter: 'ADYEN_HPP' },
-  { id: 'cat_fednow', name: 'FedNow Instant Clearing', category: 'banking_rail', description: 'US Federal Reserve 24/7/365 real-time gross settlement', adapter: 'FED_DIRECT_API' },
-  { id: 'cat_sepa', name: 'SEPA Instant Credit Transfer', category: 'banking_rail', description: 'Pan-European sub-10 second Euro settlements under EPC rules', adapter: 'ISO_20022' },
-  { id: 'cat_evolve', name: 'Evolve Bank & Trust', category: 'banking_rail', description: 'FDIC-insured core sponsor bank with virtual account ledger', adapter: 'CORE_SYNC_V3' },
-  { id: 'cat_persona', name: 'Persona 3D Biometric KYC', category: 'kyc_screening', description: 'Automated government ID verification and liveness detection', adapter: 'OAUTH_SDK' },
-  { id: 'cat_sumsub', name: 'Sumsub All-in-One Compliance', category: 'kyc_screening', description: 'KYC, KYB, PEP screening, and continuous transaction monitoring', adapter: 'SUMSUB_API' },
-  { id: 'cat_wise', name: 'Wise Institutional FX', category: 'fx_liquidity', description: 'Mid-market exchange rate execution across 50+ currencies', adapter: 'FIX_PROTOCOL' },
-  { id: 'cat_lmax', name: 'LMAX Institutional Exchange', category: 'fx_liquidity', description: 'Ultra-low latency institutional spot FX liquidity pool', adapter: 'FIX_ENGINE' }
+export const SEED_AVAILABLE_PROVIDERS_CATALOG: any[] = [
+  {
+    id: 'prov-cat-swift',
+    category: 'banking_rail',
+    providerName: 'SWIFT Alliance Gateway',
+    adapterType: 'swift_mt_mx',
+    status: 'connected',
+    isDefault: true,
+    monthlyVolumeProcessedUsd: 120000000,
+  },
 ];

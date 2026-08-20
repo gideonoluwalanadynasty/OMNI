@@ -180,6 +180,21 @@ export function DashboardShell({
               </div>
             </button>
             <button
+              id="sidebar-link-works-app"
+              onClick={() => setView('works', 'app_works')}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider text-left transition-colors cursor-pointer ${
+                (state.activeView === 'works' || (state.activeView === 'app' && (state.activeAppId === 'app_works' || state.activeAppId === 'works')))
+                  ? 'bg-gradient-to-r from-indigo-900 via-purple-900 to-neutral-950 text-white font-bold shadow-sm'
+                  : 'text-neutral-500 hover:text-neutral-900 hover:bg-indigo-50/40'
+              }`}
+            >
+              <Layers className="w-4.5 h-4.5 text-indigo-400" />
+              <div className="flex items-center justify-between w-full">
+                <span>OMNI Works</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 font-bold">OS</span>
+              </div>
+            </button>
+            <button
               onClick={() => setView('ai_os', null)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider text-left transition-colors cursor-pointer ${
                 state.activeView === 'ai_os'
@@ -702,6 +717,20 @@ export function DashboardShell({
                 >
                   <MessageSquare className="w-4.5 h-4.5 text-indigo-400" />
                   <span>OMNI Connect</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setView('works', 'app_works');
+                    setMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider text-left transition-colors cursor-pointer ${
+                    (state.activeView === 'works' || (state.activeView === 'app' && (state.activeAppId === 'app_works' || state.activeAppId === 'works')))
+                      ? 'bg-neutral-950 text-white font-bold'
+                      : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-50'
+                  }`}
+                >
+                  <Layers className="w-4.5 h-4.5 text-indigo-400" />
+                  <span>OMNI Works</span>
                 </button>
                 <button
                   onClick={() => {

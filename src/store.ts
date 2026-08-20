@@ -339,6 +339,84 @@ const SEED_APPS: AppRegistration[] = [
     featureFlags: ['FLAG_CONNECT_SOCIAL_FEED', 'FLAG_CONNECT_ENCRYPTED_MESSAGING', 'FLAG_CONNECT_COMMUNITIES', 'FLAG_CONNECT_CRM_PIPELINE', 'FLAG_CONNECT_CREATOR_STUDIO', 'FLAG_CONNECT_COMMERCE']
   },
   {
+    id: 'app_works',
+    name: 'OMNI Works',
+    slug: 'works',
+    icon: 'Layers',
+    description: 'AI-Powered Productivity & Operations Operating Environment — Collaborative Docs, Infinite Canvas, Relational DBs, Agile Sprints, Knowledge Vault & Automations.',
+    status: 'active',
+    category: 'productivity',
+    isNative: true,
+    author: 'OMNI Productivity Systems & Foundation',
+    createdAt: '2026-01-10T00:00:00Z',
+    routes: { primary: 'https://works.omni.com', path: '/works' },
+    subdomain: 'works.omni.com',
+    requiredScopes: [
+      'works.workspace.read',
+      'works.workspace.manage',
+      'works.doc.read',
+      'works.doc.write',
+      'works.canvas.edit',
+      'works.db.query',
+      'works.sprint.admin',
+      'works.wiki.publish',
+      'works.cloud.upload',
+      'works.automation.execute',
+      'works.ai.copilot',
+      'works.time.track',
+      'works.portal.share'
+    ],
+    optionalScopes: [
+      'works.admin.super',
+      'works.finance.escrow_release',
+      'works.white_label.theme',
+      'works.crdt.mesh_relay',
+      'works.security.audit_export'
+    ],
+    supportedLanguages: ['en', 'es', 'fr', 'de', 'ja', 'ar', 'zh', 'pt'],
+    supportedCountries: ['GLOBAL', 'US', 'EU', 'GB', 'CA', 'AU', 'JP', 'SG', 'NG', 'BR', 'IN'],
+    billingModel: 'saas_fixed',
+    whiteLabelCapability: true,
+    resellerCapability: true,
+    affiliateCapability: true,
+    aiCapability: true,
+    mobileCapability: true,
+    apiInfo: {
+      version: 'v1',
+      endpoints: [
+        '/api/v1/works/workspaces',
+        '/api/v1/works/docs',
+        '/api/v1/works/databases',
+        '/api/v1/works/sprints',
+        '/api/v1/works/automations',
+        '/api/v1/works/ai/copilot'
+      ]
+    },
+    webhookConfig: {
+      deliveryUrl: 'https://api.omni.com/webhooks/works',
+      subscribedEvents: [
+        'works.workspace.created',
+        'works.doc.updated',
+        'works.task.completed',
+        'works.sprint.closed',
+        'works.invoice.generated',
+        'works.automation.executed'
+      ]
+    },
+    featureFlags: [
+      'FLAG_WORKS_DOCS_CANVAS',
+      'FLAG_WORKS_RELATIONAL_DBS',
+      'FLAG_WORKS_AGILE_SPRINTS',
+      'FLAG_WORKS_ENTERPRISE_WIKI',
+      'FLAG_WORKS_CLOUD_DRIVE',
+      'FLAG_WORKS_WORKFLOW_AUTOMATIONS',
+      'FLAG_WORKS_AI_COPILOT',
+      'FLAG_WORKS_TIME_BILLING',
+      'FLAG_WORKS_CLIENT_PORTALS',
+      'FLAG_WORKS_TEMPLATES_MARKET'
+    ]
+  },
+  {
     id: 'app_logistics',
     name: 'Logistics',
     slug: 'logistics',

@@ -33,7 +33,15 @@ import {
   UserPlus,
   Flame,
   ShieldAlert,
-  HardDrive
+  HardDrive,
+  Inbox,
+  Package,
+  DollarSign,
+  Award,
+  Brain,
+  Zap,
+  Cloud,
+  Activity
 } from 'lucide-react';
 import {
   ConnectDashboardMode,
@@ -84,11 +92,31 @@ import { OmniClassroomView } from './media/OmniClassroomView';
 import { OmniRecordingsVault } from './media/OmniRecordingsVault';
 import { OmniMediaAdminModal } from './media/OmniMediaAdminModal';
 import { OmniMediaTestSuiteModal } from './media/OmniMediaTestSuiteModal';
-import { OmniSpacesHub } from './spaces/OmniSpacesHub';
-import { OmniGroupsManager } from './spaces/OmniGroupsManager';
-import { OmniChannelsBroadcastView } from './spaces/OmniChannelsBroadcastView';
-import { OmniSpacesTestSuite } from './spaces/OmniSpacesTestSuite';
-import { OmniCreateSpaceModal } from './spaces/OmniCreateSpaceModal';
+import { OmniSpaceHub } from './spaces/OmniSpaceHub';
+import { OmniGroupsHub } from './spaces/OmniGroupsHub';
+import { OmniChannelsHub } from './spaces/OmniChannelsHub';
+import { OmniCommunityModeration } from './spaces/OmniCommunityModeration';
+import { OmniCommunityAnalyticsView } from './spaces/OmniCommunityAnalytics';
+import { OmniCommunityAdminControl } from './spaces/OmniCommunityAdminControl';
+import { OmniSpacesTestSuiteModal } from './spaces/OmniSpacesTestSuiteModal';
+import { OmniSpaceCreationModal } from './spaces/OmniSpaceCreationModal';
+import { OmniUniversalInboxRoot } from './inbox/OmniUniversalInboxRoot';
+import { OmniCommerceRoot } from './commerce/OmniCommerceRoot';
+import { OmniCrmRoot } from './crm/OmniCrmRoot';
+import { OmniCreatorEconomyPlatform } from './creator/OmniCreatorEconomyPlatform';
+import { OmniAdsPlatform } from './ads/OmniAdsPlatform';
+import { OmniSocialAiRoot } from './ai/OmniSocialAiRoot';
+import { OmniDiscoveryRoot } from './discovery/OmniDiscoveryRoot';
+import { OmniWhiteLabelRoot } from './whitelabel/OmniWhiteLabelRoot';
+import { OmniProductionReadinessPlatform } from './production/OmniProductionReadinessPlatform';
+import {
+  SEED_OMNI_SPACES,
+  SEED_OMNI_GROUPS,
+  SEED_OMNI_CHANNELS,
+  SEED_COMMUNITY_ANALYTICS,
+  SEED_GOVERNANCE_POLICY
+} from '../../data/omni_spaces_seed';
+import { OmniSpace } from '../../types/omni_spaces';
 
 export const OmniConnectRoot: React.FC = () => {
   // Initialize Engine
@@ -108,7 +136,7 @@ export const OmniConnectRoot: React.FC = () => {
 
   // State
   const [dashboardMode, setDashboardMode] = useState<ConnectDashboardMode>('personal');
-  const [activeTab, setActiveTab] = useState<ConnectNavigationTab>('home');
+  const [activeTab, setActiveTab] = useState<ConnectNavigationTab>('omni_spaces');
   const [activeProfileId, setActiveProfileId] = useState<string>('prof_usr_001');
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [modules, setModules] = useState(() => engine.getModules());
@@ -119,6 +147,11 @@ export const OmniConnectRoot: React.FC = () => {
   const [contacts] = useState(() => engine.getCrmContacts());
   const [products, setProducts] = useState(() => engine.getProducts());
   const [auditLogs, setAuditLogs] = useState(() => engine.getAuditLogs());
+
+  // OMNI Spaces & Community Platform State
+  const [spaces, setSpaces] = useState<OmniSpace[]>(SEED_OMNI_SPACES);
+  const [showSpacesTestSuite, setShowSpacesTestSuite] = useState(false);
+  const [showCreateSpaceModal, setShowCreateSpaceModal] = useState(false);
 
   // Universal Identity System State
   const [universalProfiles, setUniversalProfiles] = useState(() => engine.getAllUniversalProfiles());
@@ -155,8 +188,6 @@ export const OmniConnectRoot: React.FC = () => {
   } | null>(null);
   const [showMediaAdminModal, setShowMediaAdminModal] = useState(false);
   const [showMediaTestSuiteModal, setShowMediaTestSuiteModal] = useState(false);
-  const [showCreateSpaceModal, setShowCreateSpaceModal] = useState(false);
-  const [showSpacesTestSuiteModal, setShowSpacesTestSuiteModal] = useState(false);
 
   const activeProfile = engine.getProfile(activeProfileId) || SEED_CONNECT_PROFILES[0];
   const activeUniversalProfile = engine.getUniversalProfile(activeProfileId) || universalProfiles[0];
@@ -493,10 +524,49 @@ export const OmniConnectRoot: React.FC = () => {
   };
 
   const navItems: { tab: ConnectNavigationTab; label: string; icon: React.FC<{ className?: string }>; badge?: string }[] = [
+    { tab: 'production_readiness', label: 'Production Hardening & Ops', icon: ShieldCheck, badge: 'Sovereign' },
+    { tab: 'security_hardening', label: 'Security & Penetration', icon: ShieldAlert, badge: 'AAA+' },
+    { tab: 'load_testing', label: '10M Synthetic Stress Test', icon: Zap, badge: '10M Load' },
+    { tab: 'scaling_dr', label: 'Cloud Scaling & DR', icon: Cloud, badge: 'Multi-Region' },
+    { tab: 'observability', label: 'Telemetry & Observability', icon: Activity, badge: 'Live Stream' },
+    { tab: 'super_admin_governor', label: 'Global Module Matrix', icon: Sliders, badge: 'Super Admin' },
+    { tab: 'omni_whitelabel', label: 'White Label & Enterprise', icon: Building, badge: 'Multi-Tenant' },
+    { tab: 'whitelabel_studio', label: 'White Label Studio', icon: Sliders, badge: 'Branding' },
+    { tab: 'enterprise_connect', label: 'Enterprise Workplace', icon: Shield, badge: 'Isolated' },
+    { tab: 'omni_discovery', label: 'OMNI Discover', icon: Compass, badge: '8 Signals' },
+    { tab: 'omni_search', label: 'Universal OMNI Search', icon: Search, badge: '11 Entities' },
+    { tab: 'business_discovery', label: 'Business Discovery', icon: Briefcase, badge: 'Escrow' },
+    { tab: 'omni_analytics', label: 'OMNI Analytics Platform', icon: TrendingUp, badge: '5 Tiers' },
+    { tab: 'omni_social_ai', label: 'OMNI Social AI Layer', icon: Sparkles, badge: '9 Agents' },
+    { tab: 'omni_ads', label: 'OMNI Ads & Campaigns', icon: DollarSign, badge: 'Omni Ads' },
+    { tab: 'omni_creator', label: 'Creator Economy Hub', icon: Sparkles, badge: '9 Streams' },
+    { tab: 'creator_studio', label: 'Creator Studio & Content', icon: Layers, badge: 'Workspace' },
+    { tab: 'creator_ai_repurpose', label: 'AI Repurposing (Gemini)', icon: Sparkles, badge: 'Omni AI' },
+    { tab: 'creator_schedule', label: 'Publishing Schedule', icon: Calendar, badge: 'Queue' },
+    { tab: 'creator_monetization', label: 'Creator Monetization', icon: DollarSign, badge: 'Catalogues' },
+    { tab: 'creator_marketplace', label: 'Discovery Marketplace', icon: Compass, badge: 'Experts' },
+    { tab: 'creator_memberships', label: 'Patron Memberships', icon: Award, badge: 'VIP Hub' },
+    { tab: 'creator_livestream', label: 'Live Stream Commerce', icon: Radio, badge: '1-Click' },
+    { tab: 'creator_finance', label: 'Sovereign Ledger & Payouts', icon: ShieldCheck, badge: 'Direct' },
+    { tab: 'creator_ai_manager', label: 'AI Creator Manager', icon: Brain, badge: 'Audits' },
+    { tab: 'creator_admin', label: 'Creator Super Admin', icon: ShieldAlert, badge: 'Gov' },
+    { tab: 'creator_test_suite', label: 'Creator Test Suite', icon: Terminal, badge: '8 Tests' },
+    { tab: 'universal_inbox', label: 'Universal Inbox', icon: Inbox, badge: 'Unified' },
+    { tab: 'omni_commerce', label: 'OMNI Commerce & Store', icon: ShoppingBag, badge: '9 Types' },
+    { tab: 'omni_storefront', label: 'Storefront View', icon: Building, badge: 'Verified' },
+    { tab: 'social_shopping', label: 'Social Shopping', icon: Video, badge: 'Drops' },
+    { tab: 'omni_orders', label: 'Orders & Escrow', icon: Package, badge: 'Ledger' },
+    { tab: 'seller_portal', label: 'Seller Portal & CRM', icon: TrendingUp, badge: 'Payouts' },
+    { tab: 'commerce_test_suite', label: 'Commerce Test Suite', icon: Terminal, badge: '8 Tests' },
+    { tab: 'omni_spaces', label: 'OMNI Spaces', icon: Sparkles, badge: 'Flagship' },
+    { tab: 'omni_groups', label: 'Groups & Squads', icon: Users, badge: '5 Types' },
+    { tab: 'omni_channels', label: 'Broadcast Channels', icon: Radio, badge: 'Push' },
+    { tab: 'community_analytics', label: 'Community Analytics', icon: TrendingUp, badge: 'MRR' },
+    { tab: 'spaces_admin', label: 'Spaces Governance', icon: Sliders, badge: 'Super Admin' },
+    { tab: 'spaces_test_suite', label: 'Spaces Test Suite', icon: Terminal, badge: '6 Tests' },
     { tab: 'home', label: 'Home Overview', icon: Home },
     { tab: 'feed', label: 'Social Feed & Status', icon: Globe, badge: 'Live' },
     { tab: 'moments', label: 'Moments Reels', icon: Flame, badge: 'Viral' },
-    { tab: 'creator_studio', label: 'Creator Studio & CDN', icon: Sparkles, badge: 'Monetize' },
     { tab: 'moderation_center', label: 'Content Safety & AI', icon: ShieldAlert, badge: 'Automated' },
     { tab: 'social_test_suite', label: 'Social Test Suite', icon: Terminal, badge: '6 Tests' },
     { tab: 'identity_profiles', label: 'Digital Identity Hub', icon: UserCheck, badge: 'Passport' },
@@ -515,13 +585,20 @@ export const OmniConnectRoot: React.FC = () => {
     { tab: 'recordings', label: 'Cloud Recordings', icon: HardDrive, badge: 'SHA-256' },
     { tab: 'media_test_suite', label: 'Media Test Suite', icon: Terminal, badge: '6 Tests' },
     { tab: 'media_admin', label: 'Media Super Admin', icon: ShieldAlert, badge: 'Edge Mesh' },
-    { tab: 'communities', label: 'OMNI Spaces & Hubs', icon: Users, badge: 'Flagship' },
-    { tab: 'groups', label: 'Special Groups', icon: Users, badge: 'Circles' },
-    { tab: 'channels', label: 'Broadcast Channels', icon: Radio, badge: '1-to-Many' },
-    { tab: 'spaces_test_suite', label: 'Spaces Test Suite', icon: Terminal, badge: '6 Tests' },
+    { tab: 'communities', label: 'Communities & Hubs', icon: Users },
     { tab: 'discover', label: 'Discover & Explore', icon: Compass },
     { tab: 'marketplace', label: 'Social Storefront', icon: ShoppingBag },
-    { tab: 'business', label: 'Business & CRM', icon: Briefcase },
+    { tab: 'omni_crm', label: 'OMNI CRM Engine', icon: Briefcase, badge: 'Pipeline' },
+    { tab: 'business_inbox', label: 'Business Inbox & SLA', icon: Inbox, badge: 'Unified' },
+    { tab: 'customer_360', label: 'Customer 360', icon: Users, badge: '360°' },
+    { tab: 'lead_management', label: 'AI Lead Scoring', icon: Flame, badge: 'AI' },
+    { tab: 'automation_builder', label: 'Automation Engine', icon: Sliders, badge: 'Workflows' },
+    { tab: 'customer_journeys', label: 'Customer Journeys', icon: Compass, badge: 'Nurture' },
+    { tab: 'ai_business_assistant', label: 'AI Sales Copilot', icon: Sparkles, badge: 'Gemini' },
+    { tab: 'crm_analytics', label: 'Executive Analytics', icon: TrendingUp, badge: 'RevOps' },
+    { tab: 'crm_admin', label: 'CRM Super Admin', icon: Lock, badge: 'Governance' },
+    { tab: 'crm_test_suite', label: 'CRM Test Suite', icon: Terminal, badge: '8 Tests' },
+    { tab: 'business', label: 'Business & CRM (Classic)', icon: Briefcase },
     { tab: 'events', label: 'Events & HD Video', icon: Calendar },
     { tab: 'ai_assistant', label: 'OMNI AI Copilot', icon: Sparkles },
     { tab: 'feature_control', label: 'Feature Control Centre', icon: Sliders, badge: 'Super Admin' },
@@ -723,6 +800,88 @@ export const OmniConnectRoot: React.FC = () => {
             />
           ) : (
             <>
+              {/* OMNI ADVERTISING AND CAMPAIGN ECOSYSTEM (PROMPT 12 FLAGSHIP) */}
+              {activeTab === 'omni_ads' && (
+                <OmniAdsPlatform />
+              )}
+
+              {/* OMNI UNIVERSAL INBOX & INTEGRATION GATEWAY (PROMPT 8 FLAGSHIP) */}
+              {activeTab === 'universal_inbox' && (
+                <OmniUniversalInboxRoot
+                  activeProfile={activeProfile}
+                />
+              )}
+
+              {/* OMNI SPACES VIEW (PROMPT 7 FLAGSHIP) */}
+              {activeTab === 'omni_spaces' && (
+                <OmniSpaceHub
+                  spaces={spaces}
+                  activeProfile={activeProfile}
+                  onOpenCreateSpace={() => setShowCreateSpaceModal(true)}
+                  onNavigateSuperAdmin={() => setActiveTab('spaces_admin')}
+                  onOpenTestSuite={() => setShowSpacesTestSuite(true)}
+                />
+              )}
+
+              {/* OMNI GROUPS VIEW */}
+              {activeTab === 'omni_groups' && (
+                <OmniGroupsHub
+                  groups={SEED_OMNI_GROUPS}
+                  activeProfile={activeProfile}
+                />
+              )}
+
+              {/* OMNI CHANNELS VIEW */}
+              {activeTab === 'omni_channels' && (
+                <OmniChannelsHub
+                  channels={SEED_OMNI_CHANNELS}
+                  activeProfile={activeProfile}
+                />
+              )}
+
+              {/* COMMUNITY ANALYTICS VIEW */}
+              {activeTab === 'community_analytics' && (
+                <OmniCommunityAnalyticsView
+                  analytics={SEED_COMMUNITY_ANALYTICS}
+                />
+              )}
+
+              {/* SPACES SUPER ADMIN GOVERNANCE VIEW */}
+              {activeTab === 'spaces_admin' && (
+                <OmniCommunityAdminControl
+                  policy={SEED_GOVERNANCE_POLICY}
+                  activeProfile={activeProfile}
+                />
+              )}
+
+              {/* SPACES TEST SUITE VIEW */}
+              {activeTab === 'spaces_test_suite' && (
+                <div className="space-y-6">
+                  <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
+                        <Terminal className="w-3.5 h-3.5 text-indigo-400" />
+                        OMNI SPACES DIAGNOSTIC RUNNER
+                      </span>
+                    </div>
+                    <h2 className="text-xl lg:text-2xl font-extrabold text-white">
+                      6-Point Community & Spaces Verification Suite
+                    </h2>
+                    <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
+                      Execute automated stress tests for 10k+ concurrent rosters, secret & enterprise privacy enforcement, OMNI Finance payment ledgers, AI safety risk scoring, document-grounded AI copilot answers, and multi-tier role capabilities.
+                    </p>
+
+                    <button
+                      onClick={() => setShowSpacesTestSuite(true)}
+                      className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow-lg transition-colors flex items-center gap-2"
+                    >
+                      <Terminal className="w-4 h-4" />
+                      <span>Launch Spaces Diagnostic Test Suite</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* HOME VIEW */}
               {activeTab === 'home' && (
                 <div className="space-y-6">
@@ -1014,16 +1173,47 @@ export const OmniConnectRoot: React.FC = () => {
                 />
               )}
 
-              {/* CREATOR STUDIO & CDN VIEW (PROMPT 4) */}
-              {activeTab === 'creator_studio' && (
-                <OmniCreatorStudioView
-                  analytics={creatorAnalytics}
-                  quota={cloudQuota}
-                  mediaFiles={mediaFiles}
-                  activeProfile={activeProfile}
-                  onOpenComposer={() => setActiveTab('feed')}
-                  onUploadMedia={handleUploadCloudMedia}
-                  onDeleteMedia={handleDeleteCloudMedia}
+              {/* OMNI CREATOR ECONOMY PLATFORM (PROMPT 11) */}
+              {(activeTab === 'omni_creator' ||
+                activeTab === 'creator_studio' ||
+                activeTab === 'creator_ai_repurpose' ||
+                activeTab === 'creator_schedule' ||
+                activeTab === 'creator_analytics' ||
+                activeTab === 'creator_monetization' ||
+                activeTab === 'creator_finance' ||
+                activeTab === 'creator_marketplace' ||
+                activeTab === 'creator_memberships' ||
+                activeTab === 'creator_livestream' ||
+                activeTab === 'creator_ai_manager' ||
+                activeTab === 'creator_admin' ||
+                activeTab === 'creator_test_suite') && (
+                <OmniCreatorEconomyPlatform
+                  initialTab={
+                    activeTab === 'creator_ai_repurpose'
+                      ? 'ai_assistant'
+                      : activeTab === 'creator_schedule'
+                      ? 'schedule'
+                      : activeTab === 'creator_analytics'
+                      ? 'analytics'
+                      : activeTab === 'creator_monetization'
+                      ? 'monetization'
+                      : activeTab === 'creator_finance'
+                      ? 'finance'
+                      : activeTab === 'creator_marketplace'
+                      ? 'marketplace'
+                      : activeTab === 'creator_memberships'
+                      ? 'memberships'
+                      : activeTab === 'creator_livestream'
+                      ? 'livestream'
+                      : activeTab === 'creator_ai_manager'
+                      ? 'ai_manager'
+                      : activeTab === 'creator_admin'
+                      ? 'admin'
+                      : 'studio'
+                  }
+                  onOpenDirectChat={(recId, recName) => {
+                    setActiveTab('messages');
+                  }}
                 />
               )}
 
@@ -1148,62 +1338,13 @@ export const OmniConnectRoot: React.FC = () => {
                 </div>
               )}
 
-              {/* OMNI SPACES & COMMUNITIES VIEW (FLAGSHIP) */}
-              {(activeTab === 'communities' || activeTab === 'spaces') && (
-                <OmniSpacesHub
-                  engine={engine}
-                  currentProfileId={activeProfile.id}
-                  onOpenCreateSpaceModal={() => setShowCreateSpaceModal(true)}
-                  onOpenGroups={() => setActiveTab('groups')}
-                  onOpenChannels={() => setActiveTab('channels')}
-                  onOpenTestSuite={() => setShowSpacesTestSuiteModal(true)}
+              {/* COMMUNITIES VIEW */}
+              {activeTab === 'communities' && (
+                <OmniConnectCommunityView
+                  communities={SEED_CONNECT_COMMUNITIES}
+                  activeProfile={activeProfile}
+                  onJoinCommunity={(id) => engine.joinCommunity(id, activeProfile.id)}
                 />
-              )}
-
-              {/* SPECIAL GROUPS & SQUADS VIEW */}
-              {activeTab === 'groups' && (
-                <OmniGroupsManager
-                  engine={engine}
-                  currentProfileId={activeProfile.id}
-                  onBackToSpaces={() => setActiveTab('communities')}
-                />
-              )}
-
-              {/* ONE-TO-MANY BROADCAST CHANNELS VIEW */}
-              {activeTab === 'channels' && (
-                <OmniChannelsBroadcastView
-                  engine={engine}
-                  currentProfileId={activeProfile.id}
-                  onBackToSpaces={() => setActiveTab('communities')}
-                />
-              )}
-
-              {/* SPACES AUTOMATED DIAGNOSTICS VIEW */}
-              {activeTab === 'spaces_test_suite' && (
-                <div className="space-y-6">
-                  <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 lg:p-8 shadow-2xl space-y-4">
-                    <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1.5">
-                        <Terminal className="w-3.5 h-3.5 text-indigo-400" />
-                        OMNI SPACES & COMMUNITY TEST SUITE
-                      </span>
-                    </div>
-                    <h2 className="text-xl lg:text-2xl font-extrabold text-white">
-                      Automated Spaces, Q&A Proofs, Grounded AI & Monetization Diagnostics
-                    </h2>
-                    <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
-                      Run automated verification tests covering multi-archetype spaces, member directory role matrices, AI document grounding, CRM pipeline sync, and digital store checkout.
-                    </p>
-
-                    <button
-                      onClick={() => setShowSpacesTestSuiteModal(true)}
-                      className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold shadow-lg transition-colors flex items-center gap-2"
-                    >
-                      <Terminal className="w-4 h-4" />
-                      <span>Launch Interactive Spaces Test Runner (6 Tests)</span>
-                    </button>
-                  </div>
-                </div>
               )}
 
               {/* DISCOVER VIEW */}
@@ -1248,21 +1389,63 @@ export const OmniConnectRoot: React.FC = () => {
                 </div>
               )}
 
-              {/* MARKETPLACE VIEW */}
-              {activeTab === 'marketplace' && (
-                <OmniConnectMarketplaceView
-                  products={products}
+              {/* OMNI COMMERCE & MARKETPLACE ENGINE */}
+              {(activeTab === 'omni_commerce' ||
+                activeTab === 'omni_storefront' ||
+                activeTab === 'social_shopping' ||
+                activeTab === 'omni_orders' ||
+                activeTab === 'seller_portal' ||
+                activeTab === 'shopping_cart' ||
+                activeTab === 'commerce_admin' ||
+                activeTab === 'commerce_test_suite' ||
+                activeTab === 'marketplace') && (
+                <OmniCommerceRoot
                   activeProfile={activeProfile}
-                  onPurchase={handlePurchaseProduct}
+                  activeNavTab={activeTab}
+                  onNavigateTab={setActiveTab}
+                  onOpenDirectChat={(recId, recName) => {
+                    setActiveTab('messages');
+                  }}
                 />
               )}
 
               {/* BUSINESS & CRM VIEW */}
-              {activeTab === 'business' && (
-                <OmniConnectCrmView
-                  contacts={contacts}
-                  deals={deals}
-                  onUpdateDealStage={handleUpdateDealStage}
+              {(activeTab === 'business' ||
+                activeTab === 'omni_crm' ||
+                activeTab === 'crm_pipeline' ||
+                activeTab === 'customer_360' ||
+                activeTab === 'lead_management' ||
+                activeTab === 'business_inbox' ||
+                activeTab === 'automation_builder' ||
+                activeTab === 'customer_journeys' ||
+                activeTab === 'ai_business_assistant' ||
+                activeTab === 'crm_analytics' ||
+                activeTab === 'crm_admin' ||
+                activeTab === 'crm_test_suite') && (
+                <OmniCrmRoot
+                  activeProfile={activeProfile}
+                  initialSubTab={
+                    activeTab === 'customer_360'
+                      ? 'customer_360'
+                      : activeTab === 'lead_management'
+                      ? 'lead_management'
+                      : activeTab === 'business_inbox'
+                      ? 'business_inbox'
+                      : activeTab === 'automation_builder'
+                      ? 'automation_builder'
+                      : activeTab === 'customer_journeys'
+                      ? 'customer_journeys'
+                      : activeTab === 'ai_business_assistant'
+                      ? 'ai_business_assistant'
+                      : activeTab === 'crm_analytics'
+                      ? 'crm_analytics'
+                      : activeTab === 'crm_admin'
+                      ? 'admin_control'
+                      : 'crm_pipeline'
+                  }
+                  onOpenDirectChat={(recipientId, recipientName) => {
+                    setActiveTab('messages');
+                  }}
                 />
               )}
 
@@ -1321,35 +1504,78 @@ export const OmniConnectRoot: React.FC = () => {
                 </div>
               )}
 
-              {/* AI ASSISTANT VIEW */}
-              {activeTab === 'ai_assistant' && (
-                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6 max-w-3xl mx-auto">
-                  <div className="flex items-center gap-3 border-b border-slate-800 pb-4">
-                    <div className="p-3 bg-indigo-600/20 text-indigo-400 rounded-2xl">
-                      <Sparkles className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-bold text-white">OMNI Connect AI Copilot (Gemini 2.5)</h3>
-                      <p className="text-xs text-slate-400">Universal communication assistant for drafting, live 100+ language translation, and automated meeting summarization.</p>
-                    </div>
-                  </div>
+              {/* OMNI WHITE LABEL & ENTERPRISE CONNECT PLATFORM */}
+              {(activeTab === 'omni_whitelabel' ||
+                activeTab === 'whitelabel_studio' ||
+                activeTab === 'enterprise_connect' ||
+                activeTab === 'whitelabel_admin' ||
+                activeTab === 'whitelabel_super_admin' ||
+                activeTab === 'whitelabel_test_suite') && (
+                <OmniWhiteLabelRoot
+                  initialTab={
+                    activeTab === 'whitelabel_studio'
+                      ? 'studio'
+                      : activeTab === 'enterprise_connect'
+                      ? 'workplace'
+                      : activeTab === 'whitelabel_admin'
+                      ? 'admin_portal'
+                      : activeTab === 'whitelabel_super_admin'
+                      ? 'super_admin'
+                      : 'studio'
+                  }
+                />
+              )}
 
-                  <div className="space-y-4 text-xs">
-                    <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                      <span className="text-indigo-400 font-bold uppercase text-[10px]">Real-Time Multilingual Translation</span>
-                      <p className="text-slate-300">
-                        OMNI Connect automatically translates incoming messages and community posts into your preferred native language (Supports English, Spanish, French, German, Japanese, Arabic, Yoruba, Hausa, Swahili, and 90+ others).
-                      </p>
-                    </div>
+              {/* OMNI DISCOVERY & SEARCH INTELLIGENCE PLATFORM */}
+              {(activeTab === 'omni_discovery' ||
+                activeTab === 'omni_search' ||
+                activeTab === 'business_discovery' ||
+                activeTab === 'omni_analytics' ||
+                activeTab === 'analytics_personal' ||
+                activeTab === 'analytics_creator' ||
+                activeTab === 'analytics_business' ||
+                activeTab === 'analytics_community' ||
+                activeTab === 'analytics_super_admin' ||
+                activeTab === 'ai_analytics_assistant' ||
+                activeTab === 'discovery_test_suite') && (
+                <OmniDiscoveryRoot
+                  initialTab={
+                    activeTab === 'omni_search'
+                      ? 'omni_search'
+                      : activeTab === 'business_discovery'
+                      ? 'business_discovery'
+                      : activeTab === 'omni_analytics' ||
+                        activeTab === 'analytics_personal' ||
+                        activeTab === 'analytics_creator' ||
+                        activeTab === 'analytics_business' ||
+                        activeTab === 'analytics_community' ||
+                        activeTab === 'analytics_super_admin'
+                      ? 'omni_analytics'
+                      : activeTab === 'ai_analytics_assistant'
+                      ? 'ai_analytics_assistant'
+                      : activeTab === 'discovery_test_suite'
+                      ? 'discovery_test_suite'
+                      : 'omni_discovery'
+                  }
+                  onNavigateToBusiness={() => setActiveTab('business_discovery')}
+                />
+              )}
 
-                    <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                      <span className="text-emerald-400 font-bold uppercase text-[10px]">AI Content Moderation Shield</span>
-                      <p className="text-slate-300">
-                        Zero data retention (ZDR) safety scans scan in real-time to prevent phishing attacks, malicious links, harassment, and spam before delivery.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              {/* OMNI SOCIAL INTELLIGENCE LAYER */}
+              {(activeTab === 'omni_social_ai' ||
+                activeTab === 'ai_assistant' ||
+                activeTab === 'ai_personal_assistant' ||
+                activeTab === 'ai_relationship_assistant' ||
+                activeTab === 'ai_community_assistant' ||
+                activeTab === 'ai_business_assistant' ||
+                activeTab === 'ai_customer_service_assistant' ||
+                activeTab === 'ai_creator_assistant' ||
+                activeTab === 'ai_content_assistant' ||
+                activeTab === 'ai_moderation_assistant' ||
+                activeTab === 'ai_translation_assistant' ||
+                activeTab === 'ai_privacy_controls' ||
+                activeTab === 'ai_admin_controls') && (
+                <OmniSocialAiRoot />
               )}
 
               {/* FEATURE CONTROL CENTRE VIEW (SUPER ADMIN) */}
@@ -1358,6 +1584,30 @@ export const OmniConnectRoot: React.FC = () => {
                   modules={modules}
                   onToggleModule={handleToggleModule}
                   onUpdateConfig={handleUpdateConfig}
+                />
+              )}
+
+              {/* OMNI CONNECT PRODUCTION READINESS, HARDENING & GOVERNANCE */}
+              {(activeTab === 'production_readiness' ||
+                activeTab === 'security_hardening' ||
+                activeTab === 'load_testing' ||
+                activeTab === 'scaling_dr' ||
+                activeTab === 'observability' ||
+                activeTab === 'super_admin_governor') && (
+                <OmniProductionReadinessPlatform
+                  initialSubTab={
+                    activeTab === 'security_hardening'
+                      ? 'security'
+                      : activeTab === 'load_testing'
+                      ? 'load_testing'
+                      : activeTab === 'scaling_dr'
+                      ? 'scaling_dr'
+                      : activeTab === 'observability'
+                      ? 'observability'
+                      : activeTab === 'super_admin_governor'
+                      ? 'governor'
+                      : 'security'
+                  }
                 />
               )}
 
@@ -1386,7 +1636,7 @@ export const OmniConnectRoot: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                        {(auditLogs || []).map(log => (
+                        {auditLogs.map(log => (
                           <tr key={log.id} className="hover:bg-slate-800/40 font-mono text-[11px]">
                             <td className="p-4 text-slate-400">{new Date(log.timestamp).toLocaleTimeString()}</td>
                             <td className="p-4 font-sans font-semibold text-white">{log.actorName}</td>
@@ -1430,24 +1680,21 @@ export const OmniConnectRoot: React.FC = () => {
         engine={engine}
       />
 
-      {/* Flagship OMNI Space Creation Modal */}
-      <OmniCreateSpaceModal
-        isOpen={showCreateSpaceModal}
-        onClose={() => setShowCreateSpaceModal(false)}
-        engine={engine}
-        currentProfileId={activeProfile.id}
-        onSpaceCreated={(spaceId) => {
-          setActiveTab('communities');
-        }}
+      {/* OMNI Spaces Interactive Diagnostic Test Suite Modal */}
+      <OmniSpacesTestSuiteModal
+        isOpen={showSpacesTestSuite}
+        onClose={() => setShowSpacesTestSuite(false)}
       />
 
-      {/* Spaces Automated Diagnostic Test Suite Modal */}
-      {showSpacesTestSuiteModal && (
-        <OmniSpacesTestSuite
-          engine={engine}
-          onClose={() => setShowSpacesTestSuiteModal(false)}
-        />
-      )}
+      {/* OMNI Space Creation Wizard Modal */}
+      <OmniSpaceCreationModal
+        isOpen={showCreateSpaceModal}
+        onClose={() => setShowCreateSpaceModal(false)}
+        activeProfile={activeProfile}
+        onCreateSpace={(newSpace) => {
+          setSpaces(prev => [newSpace, ...prev]);
+        }}
+      />
     </div>
   );
 };

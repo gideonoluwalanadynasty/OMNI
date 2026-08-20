@@ -29,6 +29,7 @@ import OMNIAiAppPage from './components/OMNIAiAppPage';
 import { OmniBrowserAppPage } from './components/browser/OmniBrowserAppPage';
 import OmniFinanceRoot from './components/finance/OmniFinanceRoot';
 import { OmniConnectRoot } from './components/connect/OmniConnectRoot';
+import { OmniWorksRoot } from './components/works/OmniWorksRoot';
 
 
 export default function App() {
@@ -376,6 +377,20 @@ export default function App() {
 
         {(state.activeView === 'connect' || (state.activeView === 'app' && (state.activeAppId === 'app_connect' || state.activeAppId === 'connect'))) && (
           <OmniConnectRoot />
+        )}
+
+        {(state.activeView === 'works' || (state.activeView === 'app' && (state.activeAppId === 'app_works' || state.activeAppId === 'works'))) && (
+          <OmniWorksRoot
+            onNavigateApp={(appId) => {
+              if (appId === 'ai' || appId === 'app_ai') setView('ai', 'app_ai');
+              else if (appId === 'passport') setView('passport', null);
+              else if (appId === 'finance' || appId === 'app_finance') setView('finance', 'app_finance');
+              else if (appId === 'connect' || appId === 'app_connect') setView('connect', 'app_connect');
+              else if (appId === 'browser' || appId === 'app_browser') setView('browser', 'app_browser');
+              else setView('app', appId);
+            }}
+            triggerToast={triggerToast}
+          />
         )}
 
         {state.activeView === 'app' && state.activeAppId && (

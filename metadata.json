@@ -1,6 +1,6 @@
 {
   "name": "OMNI",
-  "description": "An AI-powered sovereign digital operating platform featuring OMNI Connect (AI-Powered Social, Communication, Community, Commerce & Business Super-App), OMNI Finance OS (Global Financial Operating System, Multi-Currency Treasury, Ledger, White-Label BaaS), OMNI Browser, OMNI AI, and OMNI Passport.",
+  "description": "An AI-powered sovereign digital operating platform featuring OMNI Works (Productivity & Operations Super-Layer), OMNI Connect (Social, Communication, Community, Commerce & Business Super-App), OMNI Finance OS (Global Financial Operating System, Treasury, Ledger, BaaS), OMNI Browser, OMNI AI, and OMNI Passport.",
   "requestFramePermissions": ["camera", "microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
